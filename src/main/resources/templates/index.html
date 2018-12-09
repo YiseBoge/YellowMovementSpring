@@ -1,18 +1,306 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html lang="en"
+	  xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>Yellow Movement</title>
-    
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
-  </head>
-  
-  <body>
-  	<div class="container">
-  		<h1 class="display-4">Welcome to the Yellow Movement</h1>
-  	</div>
-    
-    
-  </body>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Welcome to the Yellow Movement</title>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+  <!-- <link href="https://fonts.googleapis.com/css?family=Yatra+One" rel="stylesheet"> -->
+
+  <!-- Fonts and icons -->
+  <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+  <!-- Custom styles for this Page -->
+  <link rel="stylesheet" th:href="@{/css/custom.css}" />
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-warning fixed-top shadow-lg">
+    <div class="container">
+      <a class="navbar-brand" th:href="@{/}">YELLOW MOVEMENT</a>
+      <button class="navbar-toggler hover-shadow" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <!-- <li class="nav-item active">
+              <a class="nav-link" href="#">Home
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Blog</a>
+            </li> -->
+          <li class="nav-item">
+            <a class="nav-link text-white" id="createAccountModalOpener" data-toggle="modal" data-target="#createAccountModal" href="#">Sign up</a>
+          </li>
+
+          <li class="nav-item ml-3 pl-2 border border-light border-top-0 border-bottom-0 border-right-0 text-white">
+            <a class="nav-link" id="loginModalOpener" data-toggle="modal" data-target="#loginModal" href="#">Sign in</a>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <!-- Create Account Modal -->
+  <div class="modal fade" id="createAccountModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content rounded-0">
+        <form class="container p-3" action="/createAccount" modelAttribute="createAccountForm" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createAccountModalTitle">Sign up - Create Your New Account Here</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="signUpName">Name</label>
+              <input type="name" name="signUpName" class="form-control rounded-0 shadow-sm" placeholder="John Doe">
+              <small class="text-danger" hidden>A Name error has occured</small>
+            </div>
+            <div class="form-group">
+              <label for="signUpEmail">Email</label>
+              <input type="email" name="signUpEmail" class="form-control rounded-0 shadow-sm" placeholder="example@example.com">
+              <small class="text-danger" hidden>An Email error has occured</small>
+            </div>
+            <div class="form-group">
+              <label for="signUpSex">Sex</label>
+              <select class="form-control rounded-0 shadow-sm" name="signUpSex">
+                <option value="">Female</option>
+                <option value="">Male</option>
+              </select>
+              <small class="text-danger" hidden>A Sex error has occured</small>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" name="signUpPassword" class="form-control rounded-0 shadow-sm" placeholder="Password">
+              <small class="text-danger" hidden>A Password error has occured</small>
+            </div>
+            <div class="form-group">
+              <label for="signUpConfirmPassword">Confirm Password</label>
+              <input type="password" name="signUpConfirmPassword" class="form-control rounded-0 shadow-sm" placeholder="Password">
+              <small class="text-danger" hidden>A Password error has occured</small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary hover-shadow rounded-0 hover-shadow" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-outline-warning hover-shadow rounded-0 hover-shadow">Sign up</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content rounded-0">
+        <form class="container p-3" action="/home" modelAttribute="loginForm" method="post">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalTitle">Sign In</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="loginEmail">Email</label>
+              <input type="email" name="loginEmail" class="form-control rounded-0 shadow-sm" placeholder="example@example.com">
+              <small class="text-danger" hidden>An email error has occured</small>
+            </div>
+            <div class="form-group">
+              <label for="loginPassword">Password</label>
+              <input type="password" name="loginPassword" class="form-control rounded-0 shadow-sm" placeholder="Password">
+              <small class="text-danger" hidden>A Password error has occured</small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary hover-shadow rounded-0 hover-shadow" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-outline-warning hover-shadow rounded-0 hover-shadow">Sign in</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <header class="shadow">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <!-- Slide One - Set the background image for this slide in the line below -->
+        <div class="carousel-item active" style="background-image: url('img/1.jpg')">
+          <div class="carousel-caption d-none d-md-block mb-4 pb-5">
+            <h3 class="display-4">First Slide</h3>
+            <p class="lead">This is a description for the first slide.</p>
+          </div>
+        </div>
+        <!-- Slide Two - Set the background image for this slide in the line below -->
+        <div class="carousel-item" style="background-image: url('img/2.jpg')">
+          <div class="carousel-caption d-none d-md-block mb-4 pb-5">
+            <h3 class="display-4">Second Slide</h3>
+            <p class="lead">This is a description for the second slide.</p>
+          </div>
+        </div>
+        <!-- Slide Three - Set the background image for this slide in the line below -->
+        <div class="carousel-item" style="background-image: url('img/3.jpg')">
+          <div class="carousel-caption d-none d-md-block mb-4 pb-5">
+            <h3 class="display-4">Third Slide</h3>
+            <p class="lead">This is a description for the third slide.</p>
+          </div>
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    </div>
+  </header>
+
+  <section class="container p-5">
+    <!-- About us -->
+    <div class="container text-center">
+      <h1 class="mt-5 display-3 text-capitalize">About Us</h1>
+      <hr>
+      <p class="lead my-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?</p>
+      <hr><br>
+    </div>
+
+    <!-- What We have Done -->
+    <div class="container text-center">
+      <h1 class="mt-5 display-3 text-capitalize">What We Do</h1>
+      <hr>
+      <p class="lead my-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?</p>
+      <hr><br>
+    </div>
+
+    <!-- Our Team -->
+    <!-- Team Members Row -->
+    <div class="container text-center">
+      <h1 class="mt-5 display-3 text-capitalize">Our Team</h2><hr>
+
+      <div class="container my-5">
+        <div class="row">
+          <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+            <img class="rounded-circle d-block mx-auto" src="img/people.jpg" width="200px" height="200px" alt="">
+            <h3 class="pt-4">John Smith
+              <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">Job Title</small>
+            </h3><hr>
+            <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+          </div>
+          <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+            <img class="rounded-circle d-block mx-auto" src="img/people.jpg" width="200px" height="200px" alt="">
+            <h3 class="pt-4">John Smith
+              <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">Job Title</small>
+            </h3><hr>
+            <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+          </div>
+          <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+            <img class="rounded-circle d-block mx-auto" src="img/people.jpg" width="200px" height="200px" alt="">
+            <h3 class="pt-4">John Smith
+              <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">Job Title</small>
+            </h3><hr>
+            <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+          </div>
+          <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+            <img class="rounded-circle d-block mx-auto" src="img/people.jpg" width="200px" height="200px" alt="">
+            <h3 class="pt-4">John Smith
+              <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">Job Title</small>
+            </h3><hr>
+            <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+          </div>
+          <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+            <img class="rounded-circle d-block mx-auto" src="img/people.jpg" width="200px" height="200px" alt="">
+            <h3 class="pt-4">John Smith
+              <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">Job Title</small>
+            </h3><hr>
+            <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+          </div>
+          <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+            <img class="rounded-circle d-block mx-auto" src="img/people.jpg" width="200px" height="200px" alt="">
+            <h3 class="pt-4">John Smith
+              <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">Job Title</small>
+            </h3><hr>
+            <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
+          </div>
+        </div>
+      </div><hr><br>
+  </div>
+
+  <div class="container text-center">
+    <h1 class="mt-5 display-3 text-capitalize">Contact Us</h1>
+      <hr>
+      <div class="row">
+        <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4">
+          <i class="material-icons shadow-sm contact-icon rounded-circle mx-auto align-middle border border-warning text-warning">call</i>
+          <h3 class="pt-4">Call Us</h3>
+          <hr>
+          <p class="text-muted">+251 987 65 4321</p>
+        </div>
+
+        <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4">
+          <i class="material-icons shadow-sm contact-icon rounded-circle mx-auto align-middle border border-warning text-warning">mail</i>
+          <h3 class="pt-4">Email</h3>
+          <hr>
+          <p class="text-muted">yellow@movement.com</p>
+        </div>
+
+        <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4">
+          <svg class="shadow-sm contact-icon rounded-circle mx-auto align-middle border border-warning text-warning" viewBox="-1.5 -3.5 30 30">
+            <path fill="#ffc107" d="M9.78,18.65L10.06,14.42L17.74,7.5C18.08,7.19 17.67,7.04 17.22,7.31L7.74,13.3L3.64,12C2.76,11.75 2.75,11.14 3.84,10.7L19.81,4.54C20.54,4.21 21.24,4.72 20.96,5.84L18.24,18.65C18.05,19.56 17.5,19.78 16.74,19.36L12.6,16.3L10.61,18.23C10.38,18.46 10.19,18.65 9.78,18.65Z" />
+          </svg>
+          <h3 class="pt-4">Telegram</h3>
+          <hr>
+          <p class="text-muted">@yellowmovement</p>
+        </div>
+      </div>
+      <hr><br>
+    </div>
+
+
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-warning">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script th:href="@{/js/jquery.min.js}" src="../js/jquery.min.js"></script>
+  <script th:href="@{/js/bootstrap.bundle.min.js}" src="/js/bootstrap.bundle.min.js"></script>
+  <script th:href="@{/js/popper.min.js}" src="../js/popper.min.js"></script>
+  <script th:href="@{/js/holder.min.js}" src="../js/holder.min.js"></script>
+
+</body>
+
 </html>
