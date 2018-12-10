@@ -7,17 +7,11 @@ import lombok.RequiredArgsConstructor;
 
 @Data
 @RequiredArgsConstructor
-public class User {
+public class Credential {
 	
 	@NotNull
-	private final String name;
+	private final String loginEmail;
 	
 	@NotNull
-	private final String email;
-	
-	@NotNull
-	private final String password;
-	
-	@NotNull
-	private final String sex = "Female";
+	private final String loginPassword;
 }
