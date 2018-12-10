@@ -6,12 +6,11 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
 public class Credential {
 	
-	@NotNull
-	private final String loginEmail;
+	@NotNull(message="Email cannot be Empty")
+	private String loginEmail;
 	
-	@NotNull
-	private final String loginPassword;
+	@NotNull(message="Password cannot be Empty")
+	private String loginPassword;
 }

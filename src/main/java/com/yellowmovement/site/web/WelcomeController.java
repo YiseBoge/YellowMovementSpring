@@ -37,7 +37,7 @@ public class WelcomeController {
   
   @GetMapping
   public String home(Model model) {
-	  
+	  model.addAttribute("login", new Credential());
 	  return "index";    
   }
   
@@ -46,8 +46,9 @@ public class WelcomeController {
     return "index";    
   }
 
+  
   @PostMapping("/login")
-  public String loginRequestor(@Valid @ModelAttribute("loginForm") Credential requester, @ModelAttribute("usersList") ArrayList<User> usersList , Errors errors, Model model) {
+  public String loginRequestor(@Valid @ModelAttribute("login") Credential requester, @ModelAttribute("usersList") ArrayList<User> usersList , Errors errors, Model model) {
 	  if (errors.hasErrors()) {
 	      return "index";
 	    }

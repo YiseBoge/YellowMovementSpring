@@ -130,7 +130,7 @@
   <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content rounded-0">
-        <form class="container p-3" action="/login" modelAttribute="loginForm" method="post">
+        <form class="container p-3" action="/login" th:object="${login}" method="post">
           <div class="modal-header">
             <h5 class="modal-title" id="loginModalTitle">Sign In</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -140,19 +140,19 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="loginEmail">Email</label>
-              <input type="email" id="loginEmail" name="loginEmail" class="form-control rounded-0 shadow-sm" placeholder="example@example.com">
-              <!-- <span class="text-danger font-weight-light"
+              <input type="email" th:field="*{loginEmail}" id="loginEmail" name="loginEmail" class="form-control rounded-0 shadow-sm" placeholder="example@example.com">
+              <span class="text-danger font-weight-light"
       				th:if="${#fields.hasErrors('loginEmail')}"
       				th:errors="*{loginEmail}">Email Error
-      		  </span> -->
+      		  </span> 
             </div>
             <div class="form-group">
               <label for="loginPassword">Password</label>
-              <input type="password" id="" name="loginPassword" class="form-control rounded-0 shadow-sm" placeholder="Password">
-              <!-- <span class="text-danger font-weight-light"
+              <input type="password" th:field="*{loginPassword}" id="" name="loginPassword" class="form-control rounded-0 shadow-sm" placeholder="Password">
+              <span class="text-danger font-weight-light"
       				th:if="${#fields.hasErrors('loginPassword')}"
-      				th:errors="*{loginPassword}">Email Error
-      		  </span> -->
+      				th:errors="*{loginPassword}">Password Error
+      		  </span>
             </div>
           </div>
           <div class="modal-footer">
