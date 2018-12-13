@@ -1,6 +1,6 @@
-$( document ).ready(function() {
-	
-	$("#loginModal").modal("show")
+$(document).ready(function () {
+
+    $("#loginModal").modal("show")
 //	$("#loginSubmit").click(function(event){
 //        event.preventDefault();
 //        
@@ -35,5 +35,5 @@ $( document ).ready(function() {
 //            }
 //        }); 
 //    }
-    
+
 })

@@ -1,16 +1,15 @@
 package com.yellowmovement.site;
 
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
 public class Credential {
 	
-	@NotNull(message="Email cannot be Empty")
+	@NotBlank(message="Email cannot be Empty")
 	private String loginEmail;
 	
-	@NotNull(message="Password cannot be Empty")
+	@NotBlank(message="Password cannot be Empty")
 	private String loginPassword;
 }

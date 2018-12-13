@@ -10,21 +10,21 @@ import lombok.RequiredArgsConstructor;
 @Data
 @RequiredArgsConstructor
 public class Post {
-	
-	@NotNull
-	private final String id;
-	
-	@NotNull
-	private final String title;
-	
-	@NotNull
-	private final String content;
-	
-	@NotNull
-	private final String category;
-	
-	@NotNull
-	private final String postedDate;
-	
-	private final String image = null;
+
+    @NotNull
+    private final String id;
+
+    @NotNull
+    private final String title;
+
+    @NotNull
+    private final String content;
+
+    @NotNull
+    private final String category;
+
+    @NotNull
+    private final String postedDate;
+
+    private final String image = null;
 }
