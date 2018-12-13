@@ -2,29 +2,38 @@ package com.yellowmovement.site;
 
 import java.util.Date;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 @Data
-@RequiredArgsConstructor
+@Entity
+@Table(name="posts")
 public class Post {
 
-    @NotNull
-    private final String id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long postId;
 
     @NotNull
-    private final String title;
+    private String title;
 
     @NotNull
-    private final String content;
+    private String content;
 
     @NotNull
-    private final String category;
+    private String category;
 
-    @NotNull
-    private final String postedDate;
+    @Column(columnDefinition="varchar(50) default NULL")
+    private String image;
 
-    private final String image = null;
+    private Date postedDate;
+
+    @PrePersist
+    void placedAt() {
+        this.postedDate = new Date();
+    }
 }
+
