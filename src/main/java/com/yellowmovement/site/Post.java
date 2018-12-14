@@ -1,13 +1,15 @@
 package com.yellowmovement.site;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Data
 @Entity
 @Table(name="posts")
@@ -31,9 +33,14 @@ public class Post {
 
     private Date postedDate;
 
+    private String dateString;
+
     @PrePersist
-    void placedAt() {
+    void postedDate() {
+        SimpleDateFormat format = new SimpleDateFormat("h:mm a - EEE, MMM d");
+
         this.postedDate = new Date();
+        this.dateString = format.format(this.postedDate);
     }
 }
 

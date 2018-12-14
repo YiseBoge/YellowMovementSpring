@@ -1,11 +1,13 @@
 package com.yellowmovement.site;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Data
@@ -17,18 +19,19 @@ public class User {
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long userId;
 
-	@NotNull
+	@NotBlank(message = "You must have a Name.")
 	private String name;
 	
-	@NotNull
+	@NotBlank(message = "Email is Required.")
 	private String email;
 	
-	@NotNull
+	@NotBlank(message = "Password is Required.")
 	private String password;
 
-	@NotNull
+	@NotBlank
 	private String sex;
 
+	@Column(columnDefinition = "varchar(10) default 'USER'")
 	@Enumerated(EnumType.STRING)
 	private Role role;
 
@@ -38,9 +41,14 @@ public class User {
 
 	private Date joiningDate;
 
+	private String dateString;
+
 	@PrePersist
-	void placedAt() {
+	void joiningDate() {
+		SimpleDateFormat format = new SimpleDateFormat("h:mm a - EEE, MMM d");
+
 		this.joiningDate = new Date();
+		this.dateString = format.format(this.joiningDate);
 	}
 }
 

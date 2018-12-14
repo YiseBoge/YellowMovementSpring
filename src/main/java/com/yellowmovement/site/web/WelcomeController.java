@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import com.yellowmovement.site.repositories.PostRepository;
 import com.yellowmovement.site.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,11 @@ public class WelcomeController {
         return new Credential();
     }
 
+    @ModelAttribute("account")
+    public User createAccount() {
+        return new User();
+    }
+
     @GetMapping
     public String home(Model model) {
         return "index";
@@ -79,4 +85,20 @@ public class WelcomeController {
 
 
     }
+
+    @PostMapping("/createAccount")
+    public String accountCreator(@Valid @ModelAttribute("account") User user, Errors errors, Model model, PostRepository postRepository) {
+        if (errors.hasErrors()) {
+            log.info(errors.getAllErrors().toString());
+            return "index";
+        }
+
+        User savedUser = userRepository.save(user);
+        log.warn(savedUser.toString());
+        this.usersList.add(savedUser);
+        return "index";
+
+
+    }
+
 }
