@@ -67,7 +67,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
-            <form class="container p-3" action="/createAccount" th:object="${account}" method="post">
+            <form id="createAccountForm" class="container p-3" action="/createAccount" th:object="${account}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createAccountModalTitle">Sign up - Create Your New Account Here</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -145,7 +145,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
-            <form class="container p-3" action="/login" th:object="${login}" method="post">
+            <form id="loginForm" class="container p-3" action="/login" th:object="${login}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="loginModalTitle">Sign In</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -372,8 +372,12 @@
 
 <!-- Bootstrap core JavaScript -->
 <script th:href="@{/js/jquery.min.js}" src="../js/jquery.min.js"></script>
+<script th:href="@{/js/jquery.validate.min.js}" src="../js/jquery.validate.min.js"></script>
 <script th:href="@{/js/bootstrap.bundle.min.js}" src="/js/bootstrap.bundle.min.js"></script>
+
 <script th:href="@{/js/modal.js}" src="../js/modal.js"></script>
+<script th:href="@{/js/validation.js}" src="../js/validation.js"></script>
+
 <script th:href="@{/js/popper.min.js}" src="../js/popper.min.js"></script>
 <script th:href="@{/js/holder.min.js}" src="../js/holder.min.js"></script>
 
