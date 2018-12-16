@@ -1,30 +1,46 @@
 package com.yellowmovement.site;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Data
-@RequiredArgsConstructor
+@Entity
+@Table(name="posts")
 public class Post {
 
-    @NotNull
-    private final String id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Long postId;
 
     @NotNull
-    private final String title;
+    private String title;
 
     @NotNull
-    private final String content;
+    private String content;
 
     @NotNull
-    private final String category;
+    private String category;
 
-    @NotNull
-    private final String postedDate;
+    @Column(columnDefinition="varchar(50) default NULL")
+    private String image;
 
-    private final String image = null;
+    private Date postedDate;
+
+    private String dateString;
+
+    @PrePersist
+    void postedDate() {
+        SimpleDateFormat format = new SimpleDateFormat("h:mm a - EEE, MMM d");
+
+        this.postedDate = new Date();
+        this.dateString = format.format(this.postedDate);
+    }
 }
+

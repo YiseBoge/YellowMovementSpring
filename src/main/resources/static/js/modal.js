@@ -1,6 +1,8 @@
 $(document).ready(function () {
 
-    $("#loginModal").modal("show")
+    // $("#loginModal").modal("show")
+
+
 //	$("#loginSubmit").click(function(event){
 //        event.preventDefault();
 //        

@@ -1,9 +1,13 @@
 package com.yellowmovement.site.web;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.validation.Valid;
 
+import com.yellowmovement.site.repositories.PostRepository;
+import com.yellowmovement.site.repositories.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -11,8 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.yellowmovement.site.Credential;
 import com.yellowmovement.site.User;
@@ -24,18 +26,27 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/")
 public class WelcomeController {
 
-    ArrayList<User> usersList = new ArrayList<User>();
+    List<User> usersList = new ArrayList<>();
+    UserRepository userRepository;
 
-    public WelcomeController() {
+    @Autowired
+    public WelcomeController(UserRepository userRepository) {
 
-        usersList.add(new User("User 1", "example1@example.com", "0000"));
-        usersList.add(new User("User 2", "example2@example.com", "0000"));
+        this.userRepository = userRepository;
+        this.userRepository.findAll().forEach(i -> usersList.add(i));
 
     }
+
+
 
     @ModelAttribute("login")
     public Credential loginCreate() {
         return new Credential();
+    }
+
+    @ModelAttribute("account")
+    public User createAccount() {
+        return new User();
     }
 
     @GetMapping
@@ -74,4 +85,20 @@ public class WelcomeController {
 
 
     }
+
+    @PostMapping("/createAccount")
+    public String accountCreator(@Valid @ModelAttribute("account") User user, Errors errors, Model model, PostRepository postRepository) {
+        if (errors.hasErrors()) {
+            log.info(errors.getAllErrors().toString());
+            return "index";
+        }
+
+        User savedUser = userRepository.save(user);
+        log.warn(savedUser.toString());
+        this.usersList.add(savedUser);
+        return "index";
+
+
+    }
+
 }

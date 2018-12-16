@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html 	lang="en"
+		xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+	<title>profile page</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-warning  shadow-lg">
+			<div class="container">
+				<a class="navbar-brand" th:href="@{/}">YELLOW MOVEMT</a>
+				<div>
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item" style="margin-right:12px;">
+							<a href="#" class="nav-link text-white">Home</a>
+						</li>
+						<li class="nav-item" style="margin-right:12px;">
+							<a href="#" class="nav-link text-white">About</a>
+						</li>
+						<li class="nav-item" style="margin-right:12px;">
+							<a href="#" class="nav-link text-white">Logout</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<br><br>
+		<div class="container" style="text-align:center;width:290px;">
+			<div class="jumbotron " style="padding-bottom:1px;margin-top:-26px;padding-top:10px;">
+  				<div class="container">
+    				<p class="lead" style="color:orange;">My Profile</p>
+ 			 	</div>
+			</div>
+		</div>
+		
+		<div class="container shadow-lg" style="border:solid 1px orange;padding:20px;padding-bottom:30px;">
+			<div class="row">
+				<div class="col-lg-6" style="margin-left:90px;">
+					<img alt="profile" src="img/people.jpg" class="shadow-lg" style="border:solid 1px orange;"><br><br>
+					<button type="submit" class="btn btn-warning btn-md" style="margin-left:80px;">Insert Image</button>	
+				</div>
+				<div class="col-lg-6" style="margin-top:10px;margin-left:-150px;">
+					<div class="container shadow-lg" style="width:260px;padding:20px;">
+						<p>Abebe Kebede</p>
+						<p>abebe.kebede@gmail.com</p>
+						<p>Age:25</p>
+						<p>Occupation:Student</p>
+						<p>Member of the club: Yes</p>
+						<p>Current Role:user</p>
+					</div>
+					<button type="submit" class="btn btn-warning btn-md shadow-lg" style="margin-left:281px;margin-top:32px;">Edit Profile</button>
+				</div>
+			</div>
+						
+		</div>
+		<br>
+		<footer class="py-5 bg-warning">
+    		<div class="container">
+        		<p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+    		</div>
+    		<!-- /.container -->
+		</footer>
+	</body>
+</html>
