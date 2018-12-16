@@ -52,7 +52,7 @@
                 </li>
 
                 <li class="nav-item ml-3 pl-2 border border-light border-top-0 border-bottom-0 border-right-0 text-white">
-                    <a class="nav-link" id="loginModalOpener" data-toggle="modal" data-target="#loginModal" href="#">Sign
+                    <a class="nav-link text-white" id="loginModalOpener" data-toggle="modal" data-target="#loginModal" href="#">Sign
                         in</a>
                 </li>
 
@@ -67,7 +67,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
-            <form class="container p-3" action="/createAccount" modelAttribute="createAccountForm" method="post">
+            <form id="createAccountForm" class="container p-3" action="/createAccount" th:object="${account}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createAccountModalTitle">Sign up - Create Your New Account Here</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -77,46 +77,49 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="signUpName">Name</label>
-                        <input type="name" id="signUpName" name="signUpName" class="form-control rounded-0 shadow-sm"
+                        <input type="text" id="signUpName" th:field="*{name}" name="signUpName"
+                               class="form-control rounded-0 shadow-sm"
                                placeholder="John Doe">
-                        <!-- <span class="text-danger font-weight-light"
-                                th:if="${#fields.hasErrors('signUpName')}"
-                                th:errors="*{signUpName}">Name Error
-                          </span> -->
+                        <span class="text-danger font-weight-light d-block"
+                              th:if="${#fields.hasErrors('name')}"
+                              th:errors="*{name}">Name Error</span>
 
                     </div>
                     <div class="form-group">
                         <label for="signUpEmail">Email</label>
-                        <input type="email" id="signUpEmail" name="signUpEmail" class="form-control rounded-0 shadow-sm"
+                        <input type="email" id="signUpEmail" th:field="*{email}" name="signUpEmail"
+                               class="form-control rounded-0 shadow-sm"
                                placeholder="example@example.com">
-                        <!-- <span class="text-danger font-weight-light"
-                                th:if="${#fields.hasErrors('signUpEmail')}"
-                                th:errors="signUpEmail">Email Error
-                          </span> -->
+                        <span class="text-danger font-weight-light d-block"
+                              th:if="${#fields.hasErrors('email')}"
+                              th:errors="*{email}">Email Error</span>
                     </div>
                     <div class="form-group">
                         <label for="signUpSex">Sex</label>
-                        <select id="signUpSex" class="form-control rounded-0 shadow-sm" name="signUpSex">
-                            <option value="">Female</option>
-                            <option value="">Male</option>
+                        <select id="signUpSex" th:field="*{sex}" class="form-control rounded-0 shadow-sm"
+                                name="signUpSex">
+                            <option value="female">Female</option>
+                            <option value="male">Male</option>
                         </select>
-                        <!-- <span class="text-danger font-weight-light"
-                                th:if="${#fields.hasErrors('signUpSex')}"
-                                th:errors="*{signUpSex}">Sex Error
-                          </span> -->
+                        <span class="text-danger font-weight-light d-block"
+                              th:if="${#fields.hasErrors('sex')}"
+                              th:errors="*{sex}">Sex Error
+                          </span>
                     </div>
                     <div class="form-group">
                         <label for="signUpPassword">Password</label>
-                        <input type="password" id="signUpPassword" name="signUpPassword" class="form-control rounded-0 shadow-sm"
+                        <input type="password" id="signUpPassword" th:field="*{password}" name="signUpPassword"
+                               class="form-control rounded-0 shadow-sm"
                                placeholder="Password">
-                        <!-- <span class="text-danger font-weight-light"
-                                th:if="${#fields.hasErrors('signUpPassword')}"
-                                th:errors="*{signUpPassword}">Password Error
-                          </span> -->
+                        <span class="text-danger font-weight-light d-block"
+                              th:if="${#fields.hasErrors('password')}"
+                              th:errors="*{password}">Password Error
+                        </span>
                     </div>
                     <div class="form-group">
                         <label for="signUpConfirmPassword">Confirm Password</label>
-                        <input type="password" id="signUpConfirmPassword" name="signUpConfirmPassword" class="form-control rounded-0 shadow-sm"
+                        <input type="password" id="signUpConfirmPassword" name="signUpConfirmPassword"
+                               class="form-control rounded-0 shadow-sm"
                                placeholder="Password">
                         <!-- <span class="text-danger font-weight-light"
                                 th:if="${#fields.hasErrors('signUpConfirmPassword')}"
@@ -142,7 +145,7 @@
      aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
-            <form class="container p-3" action="/login" th:object="${login}" method="post">
+            <form id="loginForm" class="container p-3" action="/login" th:object="${login}" method="post">
                 <div class="modal-header">
                     <h5 class="modal-title" id="loginModalTitle">Sign In</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -154,7 +157,7 @@
                         <label for="loginEmail">Email</label>
                         <input type="email" th:field="*{loginEmail}" id="loginEmail" name="loginEmail"
                                class="form-control rounded-0 shadow-sm" placeholder="example@example.com">
-                        <span class="text-danger font-weight-light d-inline-block py-2"
+                        <span class="text-danger font-weight-light d-block"
                               th:if="${#fields.hasErrors('loginEmail')}"
                               th:errors="*{loginEmail}">Email Error
       		  </span>
@@ -163,7 +166,7 @@
                         <label for="loginPassword">Password</label>
                         <input type="password" id="loginPassword" th:field="*{loginPassword}" name="loginPassword"
                                class="form-control rounded-0 shadow-sm" placeholder="Password">
-                        <span class="text-danger font-weight-light d-inline-block py-2"
+                        <span class="text-danger font-weight-light d-block"
                               th:if="${#fields.hasErrors('loginPassword')}"
                               th:errors="*{loginPassword}">Password Error
       		  </span>
@@ -223,10 +226,10 @@
     </div>
 </header>
 
-<section class="container p-5">
+<section class="container p-4">
     <!-- About us -->
     <div class="container text-center">
-        <h1 class="mt-5 display-3 text-capitalize">About Us</h1>
+        <h1 class="mt-5 display-4 text-capitalize">About Us</h1>
         <hr>
         <p class="lead my-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam
             aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur
@@ -237,7 +240,7 @@
 
     <!-- What We have Done -->
     <div class="container text-center">
-        <h1 class="mt-5 display-3 text-capitalize">What We Do</h1>
+        <h1 class="mt-5 display-4 text-capitalize">What We Do</h1>
         <hr>
         <p class="lead my-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam
             aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur
@@ -249,7 +252,7 @@
     <!-- Our Team -->
     <!-- Team Members Row -->
     <div class="container text-center">
-        <h1 class="mt-5 display-3 text-capitalize">Our Team</h2>
+        <h1 class="mt-5 display-4 text-capitalize">Our Team</h2>
             <hr>
 
             <div class="container my-5">
@@ -327,7 +330,7 @@
     </div>
 
     <div class="container text-center">
-        <h1 class="mt-5 display-3 text-capitalize">Contact Us</h1>
+        <h1 class="mt-5 display-4 text-capitalize">Contact Us</h1>
         <hr>
         <div class="row">
             <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4">
@@ -369,8 +372,12 @@
 
 <!-- Bootstrap core JavaScript -->
 <script th:href="@{/js/jquery.min.js}" src="../js/jquery.min.js"></script>
+<script th:href="@{/js/jquery.validate.min.js}" src="../js/jquery.validate.min.js"></script>
 <script th:href="@{/js/bootstrap.bundle.min.js}" src="/js/bootstrap.bundle.min.js"></script>
+
 <script th:href="@{/js/modal.js}" src="../js/modal.js"></script>
+<script th:href="@{/js/validation.js}" src="../js/validation.js"></script>
+
 <script th:href="@{/js/popper.min.js}" src="../js/popper.min.js"></script>
 <script th:href="@{/js/holder.min.js}" src="../js/holder.min.js"></script>
 
