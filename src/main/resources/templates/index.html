@@ -80,7 +80,7 @@
                         <input type="text" id="signUpName" th:field="*{name}" name="signUpName"
                                class="form-control rounded-0 shadow-sm"
                                placeholder="John Doe">
-                        <span class="text-danger font-weight-light"
+                        <span class="text-danger font-weight-light d-block"
                               th:if="${#fields.hasErrors('name')}"
                               th:errors="*{name}">Name Error</span>
 
@@ -90,7 +90,7 @@
                         <input type="email" id="signUpEmail" th:field="*{email}" name="signUpEmail"
                                class="form-control rounded-0 shadow-sm"
                                placeholder="example@example.com">
-                        <span class="text-danger font-weight-light"
+                        <span class="text-danger font-weight-light d-block"
                               th:if="${#fields.hasErrors('email')}"
                               th:errors="*{email}">Email Error</span>
                     </div>
@@ -101,7 +101,7 @@
                             <option value="female">Female</option>
                             <option value="male">Male</option>
                         </select>
-                        <span class="text-danger font-weight-light"
+                        <span class="text-danger font-weight-light d-block"
                               th:if="${#fields.hasErrors('sex')}"
                               th:errors="*{sex}">Sex Error
                           </span>
@@ -111,7 +111,7 @@
                         <input type="password" id="signUpPassword" th:field="*{password}" name="signUpPassword"
                                class="form-control rounded-0 shadow-sm"
                                placeholder="Password">
-                        <span class="text-danger font-weight-light"
+                        <span class="text-danger font-weight-light d-block"
                               th:if="${#fields.hasErrors('password')}"
                               th:errors="*{password}">Password Error
                         </span>
@@ -157,7 +157,7 @@
                         <label for="loginEmail">Email</label>
                         <input type="email" th:field="*{loginEmail}" id="loginEmail" name="loginEmail"
                                class="form-control rounded-0 shadow-sm" placeholder="example@example.com">
-                        <span class="text-danger font-weight-light"
+                        <span class="text-danger font-weight-light d-block"
                               th:if="${#fields.hasErrors('loginEmail')}"
                               th:errors="*{loginEmail}">Email Error
       		  </span>
@@ -166,7 +166,7 @@
                         <label for="loginPassword">Password</label>
                         <input type="password" id="loginPassword" th:field="*{loginPassword}" name="loginPassword"
                                class="form-control rounded-0 shadow-sm" placeholder="Password">
-                        <span class="text-danger font-weight-light"
+                        <span class="text-danger font-weight-light d-block"
                               th:if="${#fields.hasErrors('loginPassword')}"
                               th:errors="*{loginPassword}">Password Error
       		  </span>

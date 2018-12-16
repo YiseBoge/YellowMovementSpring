@@ -1,5 +1,4 @@
 $(function () {
-    alert("adfef");
     $('#loginForm').validate({
 
         rules:{
