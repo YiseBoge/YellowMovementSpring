@@ -3,15 +3,14 @@ package com.yellowmovement.site.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.yellowmovement.site.Credential;
 import com.yellowmovement.site.repositories.PostRepository;
+import com.yellowmovement.site.repositories.UserRepository;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import com.yellowmovement.site.Post;
+import com.yellowmovement.site.User;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -20,19 +19,29 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/home")
 public class HomeController {
 
-    List<Post> posts = new ArrayList<>();
-    PostRepository postRepository;
+    private List<Post> posts = new ArrayList<>();
+    private PostRepository postRepository;
+    private UserRepository userRepository;
 
-    public HomeController(PostRepository postRepository){
+    public HomeController(PostRepository postRepository, UserRepository userRepository){
         this.postRepository = postRepository;
+        this.userRepository = userRepository;
     }
 
 
-    @ModelAttribute
-    public void addPostsToModel(Model model) {
+    @ModelAttribute("postsList")
+    public List<Post> addPostsToModel() {
         postRepository.findAll().forEach(i -> posts.add(i));
 
-        model.addAttribute("postsList", posts);
+        return posts;
+    }
+
+    @ModelAttribute("loggedInUser")
+    public User addUserToModel(@SessionAttribute("login") Credential loggedIn) {
+        log.info(loggedIn.toString());
+        User user = userRepository.findByEmail(loggedIn.getLoginEmail()).get(0);
+        log.info(user.toString());
+        return user;
     }
 
     @GetMapping
