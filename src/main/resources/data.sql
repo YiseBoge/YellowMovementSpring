@@ -1,3 +1,4 @@
+
 Insert into Users (name, email, password, sex, role) values('User 1', 'example1@example.com', '0000', 'female', 'ADMIN');
 Insert into Users (name, email, password, sex, role) values('User 2', 'example2@example.com', '0000', 'male', 'BLOGGER');
 Insert into Users (name, email, password, sex, role) values('User 3', 'example3@example.com', '0000', 'female', 'USER');
