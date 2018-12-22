@@ -38,20 +38,36 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <!-- <li class="nav-item active">
-                    <a class="nav-link" href="#">Home
-                      <span class="sr-only">(current)</span>
+
+
+                <!--Navbar Items if Logged In-->
+                <li th:if="${loggedInUser}" class="nav-item active">
+                    <a class="nav-link" th:href="@{/home}">Home
+                        <span class="sr-only">(current)</span>
                     </a>
-                  </li>
-                  <li class="nav-item">
+                </li>
+                <li th:if="${loggedInUser}" class="nav-item">
                     <a class="nav-link" href="#">Blog</a>
-                  </li> -->
-                <li class="nav-item">
+                </li>
+
+
+                <li th:if="${loggedInUser}" class="nav-item dropdown ml-2" style="margin-top: -4%; margin-bottom: -3%">
+                    <a id="dropDownImg" href="#" class="dropdown-toggle nav-link d-inline-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img class="shadow-sm rounded-circle d-inline-block border border-light"
+                             src="img/people.jpg" width="38px" height="38px" alt="Card image cap" >
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropDownImg">
+                        <a class="dropdown-item" th:href="@{/profile}"><i class="fas fa-user d-inline-block mr-3"> </i>  My Profile</a>
+                        <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt d-inline-block mr-3"> </i>  Sign out</a>
+                    </div>
+                </li>
+
+                <!--Navbar Items if not Logged In-->
+                <li th:if="${loggedInUser == null}" class="nav-item">
                     <a class="nav-link text-white" id="createAccountModalOpener" data-toggle="modal"
                        data-target="#createAccountModal" href="#">Sign up</a>
                 </li>
-
-                <li class="nav-item ml-3 pl-2 border border-light border-top-0 border-bottom-0 border-right-0 text-white">
+                <li th:if="${loggedInUser == null}" class="nav-item ml-2 pl-2 border border-light border-top-0 border-bottom-0 border-right-0 text-white">
                     <a class="nav-link text-white" id="loginModalOpener" data-toggle="modal" data-target="#loginModal" href="#">Sign
                         in</a>
                 </li>
@@ -257,7 +273,7 @@
 
             <div class="container my-5">
                 <div class="row">
-                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
                         <img class="rounded-circle d-inline-block shadow mx-auto" src="img/people.jpg" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
@@ -268,7 +284,7 @@
                         <hr>
                         <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
                     </div>
-                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
                         <img class="rounded-circle d-inline-block shadow mx-auto" src="img/people.jpg" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
@@ -279,7 +295,7 @@
                         <hr>
                         <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
                     </div>
-                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
                         <img class="rounded-circle d-inline-block shadow mx-auto" src="img/people.jpg" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
@@ -290,7 +306,7 @@
                         <hr>
                         <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
                     </div>
-                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
                         <img class="rounded-circle d-inline-block shadow mx-auto" src="img/people.jpg" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
@@ -301,7 +317,7 @@
                         <hr>
                         <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
                     </div>
-                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
                         <img class="rounded-circle d-inline-block shadow mx-auto" src="img/people.jpg" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
@@ -312,7 +328,7 @@
                         <hr>
                         <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
                     </div>
-                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow">
+                    <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
                         <img class="rounded-circle d-inline-block shadow mx-auto" src="img/people.jpg" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
@@ -376,6 +392,7 @@
 <script th:href="@{/js/bootstrap.bundle.min.js}" src="/js/bootstrap.bundle.min.js"></script>
 
 <script th:href="@{/js/modal.js}" src="../js/modal.js"></script>
+<script th:href="@{/js/animate.js}" src="../js/animate.js"></script>
 <script th:href="@{/js/validation.js}" src="../js/validation.js"></script>
 
 <script th:href="@{/js/popper.min.js}" src="../js/popper.min.js"></script>

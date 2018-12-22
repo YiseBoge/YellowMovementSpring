@@ -3,6 +3,7 @@ package com.yellowmovement.site.web;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import com.yellowmovement.site.repositories.PostRepository;
@@ -17,11 +18,11 @@ import com.yellowmovement.site.Credential;
 import com.yellowmovement.site.User;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.support.SessionStatus;
 
 @Slf4j
 @Controller
 @RequestMapping("/")
-@SessionAttributes("login")
 public class WelcomeController {
 
     List<User> usersList = new ArrayList<>();
@@ -35,7 +36,13 @@ public class WelcomeController {
 
     }
 
-
+    @ModelAttribute("loggedInUser")
+    public User getLoggedIn(HttpSession session) {
+        if (session.getAttribute("loggedInUser") == null){
+            return null;
+        }
+        return (User)session.getAttribute("loggedInUser");
+    }
 
     @ModelAttribute("login")
     public Credential loginCreate() {
@@ -53,13 +60,14 @@ public class WelcomeController {
     }
 
     @GetMapping("/logout")
-    public String logout() {
-        return "index";
+    public String logout(HttpSession session) {
+        session.removeAttribute("loggedInUser");
+        return "redirect:/";
     }
 
 
     @PostMapping("/login")
-    public String loginRequestor(@Valid @ModelAttribute("login") Credential requester, Errors errors, Model model) {
+    public String loginRequestor(@Valid @ModelAttribute("login") Credential requester, Errors errors, HttpSession session) {
         if (errors.hasErrors()) {
             log.info(errors.getAllErrors().toString());
             return "index";
@@ -68,7 +76,7 @@ public class WelcomeController {
             if (requester.getLoginEmail().equals(user.getEmail())) {
                 if (requester.getLoginPassword().equals(user.getPassword())) {
 
-                    model.addAttribute("loggedInUser", user);
+                    session.setAttribute("loggedInUser", user);
 
                     log.info("Found password too");
                     return "redirect:/home";

@@ -20,7 +20,7 @@ body {
     background-attachment: fixed;
 }
 
-.btn-outline-warning:hover {
+.btn-outline-warning:hover, .bg-warning dropdown-item:hover {
     color: #f8f9fa !important;
 }
 
@@ -38,7 +38,11 @@ input[type="name"]:focus, input[type="text"]:focus, input[type="password"]:focus
     width: 150px;
 }
 
-.navbar {
+#dropImg{
+    margin-left: -50% !important;
+}
+
+.navbar, .dropdown-menu{
     opacity: 0.95;
 }
 
@@ -63,5 +67,9 @@ img.profile-pic {
 @media (min-width: 992px) {
     body {
         padding-top: 56px;
+    }
+
+    #dropImg{
+        margin-left: 0% !important;
     }
 }
