@@ -1,6 +1,6 @@
-package com.yellowmovement.site.web;
+package com.yellowmovement.site.controllers;
 
-import com.yellowmovement.site.User;
+import com.yellowmovement.site.security.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

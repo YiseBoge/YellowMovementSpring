@@ -1,4 +1,4 @@
-package com.yellowmovement.site.web;
+package com.yellowmovement.site.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,8 @@ import com.yellowmovement.site.repositories.PostRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import com.yellowmovement.site.Post;
-import com.yellowmovement.site.User;
+import com.yellowmovement.site.domains.Post;
+import com.yellowmovement.site.security.User;
 
 import lombok.extern.slf4j.Slf4j;
 
