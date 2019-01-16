@@ -24,7 +24,13 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
 	private Long userId;
-
+	
+	public User( String name,String email,int enable,String password,String sex) {
+		
+	}
+	public User() {
+		
+	}
 	@NotBlank(message = "You must have a Name.")
 	private String name;
 
