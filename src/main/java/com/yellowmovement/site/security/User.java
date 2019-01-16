@@ -53,7 +53,7 @@ public class User implements UserDetails {
 
 	@PrePersist
 	void joiningDate() {
-		SimpleDateFormat format = new SimpleDateFormat("h:mm a - EEE, MMM d");
+		SimpleDateFormat format = new SimpleDateFormat("h:mm a - EEE, MMM d, YYYY");
 
 		this.joiningDate = new Date();
 		this.dateString = format.format(this.joiningDate);

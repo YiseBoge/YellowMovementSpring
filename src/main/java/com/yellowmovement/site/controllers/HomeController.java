@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yellowmovement.site.repositories.PostRepository;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,22 +44,12 @@ public class HomeController {
     }
 
     @ModelAttribute("loggedInUser")
-    public User addUserToModel(HttpSession session) {
-        log.info(session.toString());
-        if (session.getAttribute("loggedInUser")==null){
-            return null;
-        }
-        User user = (User)session.getAttribute("loggedInUser");
-        log.info(user.toString());
+    public User addUserToModel(@AuthenticationPrincipal User user) {
         return user;
     }
 
     @GetMapping
-    public String home(HttpSession session) {
-
-        if (session.getAttribute("loggedInUser")==null){
-            return "redirect:/";
-        }
+    public String home() {
         return "HomePage";
     }
 

@@ -5,6 +5,7 @@ import com.yellowmovement.site.domains.Post;
 import com.yellowmovement.site.security.User;
 import com.yellowmovement.site.repositories.PostRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,22 +29,13 @@ public class PostContentPageController {
 
 
     @ModelAttribute("loggedInUser")
-    public User addUserToModel(HttpSession session) {
-        if (session.getAttribute("loggedInUser")==null){
-            return null;
-        }
-        User user = (User)session.getAttribute("loggedInUser");
-        log.info(user.toString());
+    public User addUserToModel(@AuthenticationPrincipal User user) {
         return user;
     }
 
 
     @GetMapping("/{postId}")
-    public String openPostPage(@PathVariable("postId") Long postId, Model model, HttpSession session){
-        if (session.getAttribute("loggedInUser")==null){
-            return "redirect:/";
-        }
-
+    public String openPostPage(@PathVariable("postId") Long postId, Model model){
         Optional<Post> currentPost = postRepository.findById(postId);
 
         if (currentPost.isPresent()){

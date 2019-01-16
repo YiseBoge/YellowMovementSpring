@@ -29,7 +29,7 @@ public class WelcomeController {
     @Autowired
     private UserService userService;
 
-    @ModelAttribute(name="user")
+    @ModelAttribute(name="account")
     public User user() {
         return new User();
     }
@@ -39,17 +39,6 @@ public class WelcomeController {
         return "redirect:/?performing=login";
     }
 
-
-    @ModelAttribute("login")
-    public Credential loginCreate() {
-        return new Credential();
-    }
-
-    @ModelAttribute("account")
-    public User createAccount() {
-        return new User();
-    }
-
     @GetMapping
     public String home() {
         return "index";
@@ -57,7 +46,7 @@ public class WelcomeController {
 
     @GetMapping("/createAccount")
     public String openCreateAccountPage(){
-        return "redirect:/performing=createAccount";
+        return "redirect:/?performing=createAccount";
     }
 
     @PostMapping("/createAccount")
@@ -65,11 +54,11 @@ public class WelcomeController {
         User userExists = userService.findUserByEmail(user.getEmail());
         if (userExists != null) {
             bindingResult
-                    .rejectValue("username", "error.username",
+                    .rejectValue("email", "error.username",
                             "There is already a user registered with the email provided");
         }
         if (bindingResult.hasErrors()) {
-            return "redirect:/?performing=createAccount";
+            return "redirect:/?performing=createAccount&error=true";
         } else {
 
             userService.saveUser(user);
@@ -78,6 +67,11 @@ public class WelcomeController {
 
             return "redirect:/";
         }
+    }
+
+    @GetMapping("/access-denied")
+    public String accessDenied(){
+        return "access_denied";
     }
 
 }

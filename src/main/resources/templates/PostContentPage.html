@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <head>
 
@@ -38,27 +38,24 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <li th:if="${loggedInUser}" class="nav-item active">
+                <li sec:authorize="isAuthenticated()" class="nav-item active">
                     <a class="nav-link" th:href="@{/home}">Home
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
-                <li th:if="${loggedInUser}" class="nav-item">
-                    <a class="nav-link" href="#">Blog</a>
-                </li>
+                <!--<li sec:authorize="isAuthenticated()" class="nav-item">-->
+                    <!--<a class="nav-link" href="#">Blog</a>-->
+                <!--</li>-->
 
 
-                <li th:if="${loggedInUser}" class="nav-item dropdown ml-2" style="margin-top: -4%; margin-bottom: -3%">
-                    <a id="dropDownImg" href="#" class="dropdown-toggle nav-link d-inline-block" data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
+                <li sec:authorize="isAuthenticated()" class="nav-item dropdown ml-2" style="margin-top: -4%; margin-bottom: -3%">
+                    <a id="dropDownImg" href="#" class="dropdown-toggle nav-link d-inline-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="shadow-sm rounded-circle d-inline-block border border-light"
-                             th:src="@{/img/people.jpg}" width="38px" height="38px" alt="Card image cap">
+                             th:src="@{/img/people.jpg}" width="38px" height="38px" alt="Card image cap" >
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropDownImg">
-                        <a class="dropdown-item" th:href="@{/profile}"><i class="fas fa-user d-inline-block mr-3"> </i>
-                            My Profile</a>
-                        <a class="dropdown-item" th:href="@{/logout}"><i
-                                class="fas fa-sign-out-alt d-inline-block mr-3"> </i> Sign out</a>
+                        <a class="dropdown-item" th:href="@{/profile}"><i class="fas fa-user d-inline-block mr-3"> </i>  My Profile</a>
+                        <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt d-inline-block mr-3"> </i>  Sign out</a>
                     </div>
                 </li>
 
@@ -84,7 +81,7 @@
             <hr>
 
             <!-- Date/Time -->
-            <p>Posted on <span th:text="${currentPost.dateString}"></span></p>
+            <p class="text-muted" th:text="${currentPost.dateString}"></p>
 
             <hr>
 
@@ -102,19 +99,18 @@
             <hr>
 
 
-
             <!-- Comments Form -->
-            <div class="card my-4 rounded-0">
-                <h5 class="card-header">Leave a Comment:</h5>
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <textarea class="form-control rounded-0" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-outline-warning rounded-0 hover-shadow">Submit</button>
-                    </form>
-                </div>
-            </div>
+            <!--<div class="card my-4 rounded-0">-->
+                <!--<h5 class="card-header">Leave a Comment:</h5>-->
+                <!--<div class="card-body">-->
+                    <!--<form>-->
+                        <!--<div class="form-group">-->
+                            <!--<textarea class="form-control rounded-0" rows="3"></textarea>-->
+                        <!--</div>-->
+                        <!--<button type="submit" class="btn btn-outline-warning rounded-0 hover-shadow">Submit</button>-->
+                    <!--</form>-->
+                <!--</div>-->
+            <!--</div>-->
 
             <!-- Single Comment -->
             <div class="media mb-4">
