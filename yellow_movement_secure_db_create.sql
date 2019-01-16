@@ -52,6 +52,7 @@
 
     create table users (
        user_id bigint not null auto_increment,
+       enabled int,
         date_string varchar(255),
         email varchar(255),
         joining_date datetime,
@@ -61,45 +62,45 @@
         primary key (user_id)
     ) engine=InnoDB
 
-    alter table users 
+    alter table users
        add constraint UK_6dotkott2kjsp8vw4d0m25fb7 unique (email)
 
-    alter table blogs 
-       add constraint FK9b8vkbu11uvcdjguqmnuy3ox9 
-       foreign key (blogger_user_id) 
+    alter table blogs
+       add constraint FK9b8vkbu11uvcdjguqmnuy3ox9
+       foreign key (blogger_user_id)
        references users (user_id)
 
-    alter table blogs_comments 
-       add constraint FKdxo10ylp58aw8vc7nhg2cjt95 
-       foreign key (comments_comment_id) 
+    alter table blogs_comments
+       add constraint FKdxo10ylp58aw8vc7nhg2cjt95
+       foreign key (comments_comment_id)
        references comments (comment_id)
 
-    alter table blogs_comments 
-       add constraint FKl478181p6qfxiuxcb7rpfamm4 
-       foreign key (blog_blog_id) 
+    alter table blogs_comments
+       add constraint FKl478181p6qfxiuxcb7rpfamm4
+       foreign key (blog_blog_id)
        references blogs (blog_id)
 
-    alter table comments 
-       add constraint FKpsv7livucf5f1od6p39814jvh 
-       foreign key (commenter_user_id) 
+    alter table comments
+       add constraint FKpsv7livucf5f1od6p39814jvh
+       foreign key (commenter_user_id)
        references users (user_id)
 
-    alter table posts_comments 
-       add constraint FK608b8p55kej4ce02qk9uim6be 
-       foreign key (comments_comment_id) 
+    alter table posts_comments
+       add constraint FK608b8p55kej4ce02qk9uim6be
+       foreign key (comments_comment_id)
        references comments (comment_id)
 
-    alter table posts_comments 
-       add constraint FKiq8a7nqb171ojc9xk99lxoisd 
-       foreign key (post_post_id) 
+    alter table posts_comments
+       add constraint FKiq8a7nqb171ojc9xk99lxoisd
+       foreign key (post_post_id)
        references posts (post_id)
 
-    alter table user_role 
-       add constraint FKt7e7djp752sqn6w22i6ocqy6q 
-       foreign key (role_id) 
+    alter table user_role
+       add constraint FKt7e7djp752sqn6w22i6ocqy6q
+       foreign key (role_id)
        references roles (id)
 
-    alter table user_role 
-       add constraint FKj345gk1bovqvfame88rcx7yyx 
-       foreign key (user_id) 
+    alter table user_role
+       add constraint FKj345gk1bovqvfame88rcx7yyx
+       foreign key (user_id)
        references users (user_id)
