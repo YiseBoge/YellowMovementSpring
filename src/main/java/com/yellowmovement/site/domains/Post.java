@@ -1,7 +1,9 @@
-package com.yellowmovement.site;
+package com.yellowmovement.site.domains;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -42,5 +44,8 @@ public class Post {
         this.postedDate = new Date();
         this.dateString = format.format(this.postedDate);
     }
+
+    @ManyToMany(targetEntity = Comment.class)
+    List<Comment> comments = new ArrayList<>() ;
 }
 

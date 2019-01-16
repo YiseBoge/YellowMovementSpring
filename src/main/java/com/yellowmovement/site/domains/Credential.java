@@ -1,4 +1,4 @@
-package com.yellowmovement.site;
+package com.yellowmovement.site.domains;
 
 import javax.validation.constraints.NotBlank;
 

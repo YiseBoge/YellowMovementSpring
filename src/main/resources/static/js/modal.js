@@ -1,6 +1,7 @@
 $(document).ready(function () {
 
-    // $("#loginModal").modal("show")
+    $("#loginModal").modal("show")
+    $("#createAccountModal").modal("show")
 
 
 //	$("#loginSubmit").click(function(event){
