@@ -135,7 +135,7 @@
 
                     <div class="row p-1" th:each="category:${categoriesList}">
                         <div class="col-lg-6 py-1">
-                            <a href="#" class="text-warning" th:text="${category}">Web Design</a>
+                            <a th:href="@{'/home/category/' + ${category}}" class="text-warning" th:text="${category}">Web Design</a>
                         </div>
 
                     </div>

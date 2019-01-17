@@ -33,7 +33,7 @@ public class User implements UserDetails {
 		this.sex = sex;
 	}
 	public User() {
-		
+
 	}
 	@NotBlank(message = "You must have a Name.")
 	private String name;

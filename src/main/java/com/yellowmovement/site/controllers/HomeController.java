@@ -6,14 +6,13 @@ import java.util.List;
 import com.yellowmovement.site.repositories.PostRepository;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import com.yellowmovement.site.domains.Post;
 import com.yellowmovement.site.security.User;
 
 import lombok.extern.slf4j.Slf4j;
-
-import javax.servlet.http.HttpSession;
 
 @Slf4j
 @Controller
@@ -59,5 +58,15 @@ public class HomeController {
         return "HomePage";
     }
 
+
+    @GetMapping("/category/{category}")
+    public String openPostPage(@PathVariable("category") String category, Model model){
+        List<Post> postsByQuerry = postRepository.searchPosts(category);
+
+        model.addAttribute("postsList", postsByQuerry);
+
+
+        return "HomePage";
+    }
 
 }
