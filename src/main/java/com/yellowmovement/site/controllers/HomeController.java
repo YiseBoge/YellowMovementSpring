@@ -59,12 +59,11 @@ public class HomeController {
     }
 
 
-    @GetMapping("/category/{category}")
-    public String openPostPage(@PathVariable("category") String category, Model model){
-        List<Post> postsByQuerry = postRepository.searchPosts(category);
+    @GetMapping("/category")
+    public String openPostPage(@RequestParam("keyword") String keyword, Model model){
+        List<Post> postsByQuery = postRepository.searchPosts(keyword);
 
-        model.addAttribute("postsList", postsByQuerry);
-
+        model.addAttribute("postsList", postsByQuery);
 
         return "HomePage";
     }
