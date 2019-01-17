@@ -1,6 +1,6 @@
 package com.yellowmovement.site.repositories;
 
-import com.yellowmovement.site.Post;
+import com.yellowmovement.site.domains.Post;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
