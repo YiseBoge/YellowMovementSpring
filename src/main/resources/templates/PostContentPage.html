@@ -48,14 +48,17 @@
                 <!--</li>-->
 
 
-                <li sec:authorize="isAuthenticated()" class="nav-item dropdown ml-2" style="margin-top: -4%; margin-bottom: -3%">
+                <li sec:authorize="isAuthenticated()" class="nav-item ml-2 pl-2 border border-light border-top-0 border-bottom-0 border-right-0 text-white">
+                    <span class="nav-link text-light" th:text="${loggedInUser.name}"> </span>
+                </li>
+                <li sec:authorize="isAuthenticated()" class="nav-item dropdown" style="margin-top: -4%; margin-bottom: -3%">
                     <a id="dropDownImg" href="#" class="dropdown-toggle nav-link d-inline-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="shadow-sm rounded-circle d-inline-block border border-light"
                              th:src="@{'/img/profile_pictures/'+${loggedInUser.profilePic}}" width="38px" height="38px" alt="Card image cap" >
                     </a>
                     <div class="dropdown-menu rounded-0" aria-labelledby="dropDownImg">
-                        <a class="dropdown-item" th:href="@{/profile}"><i class="fas fa-user d-inline-block mr-3"> </i>  My Profile</a>
-                        <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt d-inline-block mr-3"> </i>  Sign out</a>
+                        <a class="dropdown-item" th:href="@{/profile}"><i class="fas fa-user-alt d-inline-block mr-2"> </i>  My Profile</a>
+                        <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt d-inline-block mr-2"> </i>  Sign out</a>
                     </div>
                 </li>
 
@@ -87,7 +90,7 @@
 
             <!-- Preview Image -->
 
-            <img class="d-inline-block rounded-0 hover-shadow" style="width: 100%; height: auto" th:src="@{/img/franknmatt.jpg}" th:alt="${currentPost.title}">
+            <img class="d-inline-block rounded-0 shadow-sm" style="width: 100%; height: auto" th:src="@{/img/franknmatt.jpg}" th:alt="${currentPost.title}">
 
             <hr>
 

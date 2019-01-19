@@ -3,10 +3,7 @@ package com.yellowmovement.site.controllers;
 import com.yellowmovement.site.security.User;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/profile")
@@ -18,5 +15,22 @@ public class ProfileController {
 	@GetMapping
 	public String showProfile() {
 		return "ProfilePage";
+	}
+
+	@GetMapping("/uploadImg")
+	public String showProfileWithUploadmage() {
+		return "redirect:/profile?performing=uploadImg";
+	}
+
+	@GetMapping("/edit")
+	public String showProfileWithEdit() {
+		return "redirect:/profile?performing=edit";
+	}
+
+	@PostMapping("/uploadImg")
+	public String uploadImg() {
+
+		// perform uploading tasks here
+		return "redirect:/profile?performing=edit";
 	}
 }

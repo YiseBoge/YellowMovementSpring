@@ -1,23 +1,15 @@
 package com.yellowmovement.site.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.yellowmovement.site.repositories.PostRepository;
-import com.yellowmovement.site.repositories.UserRepository;
 import com.yellowmovement.site.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import com.yellowmovement.site.domains.Credential;
 import com.yellowmovement.site.security.User;
 
 import lombok.extern.slf4j.Slf4j;

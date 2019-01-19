@@ -1,7 +1,28 @@
+
+function readPreviewURL(input) {
+
+
+
+    alert(input.files[0])
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+
+
+            $('#previewImage')
+                .css('background-image', "url("+e.target.result+")");
+        };
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 $(document).ready(function () {
 
     $("#loginModal").modal("show")
     $("#createAccountModal").modal("show")
+    $("#uploadImgModal").modal("show")
+
 
 
 //	$("#loginSubmit").click(function(event){
