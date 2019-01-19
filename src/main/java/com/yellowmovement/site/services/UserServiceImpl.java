@@ -39,6 +39,14 @@ public class UserServiceImpl implements UserService {
     public void saveUser(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
+        if (user.getSex().equals("female")){
+            user.setProfilePic("people_female.jpg");
+        }else if (user.getSex().equals("male")) {
+            user.setProfilePic("people_male.jpeg");
+        }
+        else{
+            throw new NullPointerException();
+        }
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);

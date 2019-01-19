@@ -54,7 +54,7 @@
                 <li sec:authorize="isAuthenticated()" class="nav-item dropdown ml-2" style="margin-top: -4%; margin-bottom: -3%">
                     <a id="dropDownImg" href="#" class="dropdown-toggle nav-link d-inline-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="shadow-sm rounded-circle d-inline-block border border-light"
-                             src="img/people.jpg" width="38px" height="38px" alt="Card image cap" >
+                             th:src="@{'/img/profile_pictures/'+${loggedInUser.profilePic}}" width="38px" height="38px" alt="Card image cap" >
                     </a>
                     <div class="dropdown-menu rounded-0" aria-labelledby="dropDownImg">
                         <a class="dropdown-item" th:href="@{/profile}"><i class="fas fa-user d-inline-block mr-3"> </i>  My Profile</a>
@@ -273,7 +273,7 @@
             <div class="container my-5">
                 <div class="row">
                     <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
-                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/people.jpg}" width="200px"
+                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/profile_pictures/people_female.jpg}" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
                             <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">
@@ -284,7 +284,7 @@
                         <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
                     </div>
                     <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
-                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/people.jpg}" width="200px"
+                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/profile_pictures/people_male.jpeg}" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
                             <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">
@@ -295,7 +295,7 @@
                         <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
                     </div>
                     <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
-                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/people.jpg}" width="200px"
+                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/profile_pictures/people_female.jpg}" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
                             <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">
@@ -306,7 +306,7 @@
                         <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
                     </div>
                     <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
-                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/people.jpg}" width="200px"
+                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/profile_pictures/people_male.jpeg}" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
                             <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">
@@ -317,7 +317,7 @@
                         <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
                     </div>
                     <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
-                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/people.jpg}" width="200px"
+                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/profile_pictures/people_female.jpg}" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
                             <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">
@@ -328,7 +328,7 @@
                         <p>What does this team member to? Keep it short! This is also a great spot for social links!</p>
                     </div>
                     <div class="col-lg-4 col-sm-6 text-center mb-3 pt-4 hover-shadow hover-raise">
-                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/people.jpg}" width="200px"
+                        <img class="rounded-circle d-inline-block shadow mx-auto" th:src="@{/img/profile_pictures/people_male.jpeg}" width="200px"
                              height="200px" alt="">
                         <h3 class="pt-4">John Smith
                             <small class="text-muted ml-2 pl-3 border border-dark border-top-0 border-bottom-0 border-right-0">

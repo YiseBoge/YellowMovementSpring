@@ -17,6 +17,6 @@ public class ProfileController {
 
 	@GetMapping
 	public String showProfile() {
-		return "Profile";
+		return "ProfilePage";
 	}
 }

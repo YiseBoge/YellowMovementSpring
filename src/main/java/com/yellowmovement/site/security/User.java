@@ -61,9 +61,11 @@ public class User implements UserDetails {
 
 	private String dateString;
 
+	private String profilePic;
+
 	@PrePersist
 	void joiningDate() {
-		SimpleDateFormat format = new SimpleDateFormat("h:mm a - EEE, MMM d, YYYY");
+		SimpleDateFormat format = new SimpleDateFormat("MMM d, YYYY");
 
 		this.joiningDate = new Date();
 		this.dateString = format.format(this.joiningDate);

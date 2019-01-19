@@ -10,6 +10,7 @@ import com.yellowmovement.site.repositories.PostRepository;
 import com.yellowmovement.site.repositories.UserRepository;
 import com.yellowmovement.site.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,6 +33,11 @@ public class WelcomeController {
     @ModelAttribute(name="account")
     public User user() {
         return new User();
+    }
+
+    @ModelAttribute(name="loggedInUser")
+    public User loggedInUser(@AuthenticationPrincipal User user){
+        return user;
     }
 
     @GetMapping("/login")
