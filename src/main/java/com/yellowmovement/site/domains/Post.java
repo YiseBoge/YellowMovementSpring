@@ -35,17 +35,17 @@ public class Post {
 
     private Date postedDate;
 
-    private String dateString;
-
     @PrePersist
     void postedDate() {
-        SimpleDateFormat format = new SimpleDateFormat("h:mm a - EEE, MMM d");
-
         this.postedDate = new Date();
-        this.dateString = format.format(this.postedDate);
     }
 
     @ManyToMany(targetEntity = Comment.class)
     List<Comment> comments = new ArrayList<>() ;
+
+    public String dateString(){
+        SimpleDateFormat format = new SimpleDateFormat("h:mm a - EEE, MMM d");
+        return format.format(this.postedDate);
+    }
 }
 

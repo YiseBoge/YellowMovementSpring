@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="fragments/fragments :: head"></head>
 
@@ -17,7 +17,7 @@
     <div class="row">
 
         <!-- Post Content Column -->
-        <div class="col-lg-10">
+        <div class="col-xl-10">
 
             <!-- Title -->
             <h1 class="mt-4" th:text="${currentPost.title}">Post Title</h1>
@@ -26,7 +26,7 @@
             <hr>
 
             <!-- Date/Time -->
-            <p class="text-muted" th:text="${currentPost.dateString}"></p>
+            <p class="text-muted" th:text="${currentPost.dateString()}"></p>
 
             <hr>
 
@@ -44,75 +44,97 @@
             <hr>
 
 
-            <!-- Comments Form -->
-            <!--<div class="card my-4 rounded-0">-->
-            <!--<h5 class="card-header">Leave a Comment:</h5>-->
-            <!--<div class="card-body">-->
-            <!--<form>-->
-            <!--<div class="form-group">-->
-            <!--<textarea class="form-control rounded-0" rows="3"></textarea>-->
-            <!--</div>-->
-            <!--<button type="submit" class="btn btn-outline-warning rounded-0 hover-shadow">Submit</button>-->
-            <!--</form>-->
-            <!--</div>-->
-            <!--</div>-->
+            <div class="ml-md-3 col-md-8 my-4" style="max-height: 30vh !important; overflow-y: scroll">
 
-            <!-- Single Comment -->
-            <div class="media mb-4">
-                <img alt="" class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50">
-                <div class="media-body">
-                    <h5 class="mt-0">Commenter Name</h5>
-                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
-                    purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
-                    vulputate fringilla. Donec lacinia congue felis in faucibus.
+                <div class="media mb-4" th:each="comment:${currentPost.comments}">
+
+                    <img class="d-flex mr-3 rounded-circle" height="38" th:src="@{'/uploads/profile_pictures/' + ${comment.getCommenter().getProfilePic()}}"/>
+
+                    <div class="media-body">
+
+                        <h5 class="mt-0" th:text="${comment.getCommenter().getName()}">commenter name </h5>
+
+
+                        <p class="col-md-8 my-0" th:text="${comment.getContent()}">post content</p>
+
+
+
+                        <p class="text-muted d-block" th:text="${comment.dateString()}">comment date</p>
+                    </div>
+
+
                 </div>
             </div>
 
-            <!-- Comment with nested comments -->
+            <div class="card col-md-8 my-4 ml-md-3 rounded-0 px-0">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
 
+                    <form action="/post/comment" method="post" role="form" th:object="${comment}">
+                        <div class="form-group">
+                            <textarea class="form-control rounded-0" name="CommentArea" rows="2" th:field="*{content}"></textarea>
+                            <span class="text-danger font-weight-light d-block"
+                                  th:errors="*{content}"
+                                  th:if="${#fields.hasErrors('content')}">Name Error</span>
+                        </div>
+                        <button class="btn btn-outline-warning rounded-0 hover-shadow" type="submit">Comment</button>
+                        <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
+                        <input th:name="postId" th:value="${currentPost.getPostId()}" type="hidden"/>
+                    </form>
 
+                </div>
+            </div>
+            <div class="mb-5">
+                <a class="btn btn-secondary hover-shadow rounded-0" th:href="@{/home}">
+                    Return to Home
+                </a>
+            </div>
         </div>
 
-        <!-- Sidebar Widgets Column -->
-        <!--<div class="col-md-4">-->
-        <!--<br><br><br>-->
-        <!--&lt;!&ndash; Search Widget &ndash;&gt;-->
-        <!--<div class="card my-4 rounded-0 shadow-sm">-->
-        <!--<h5 class="card-header">Search</h5>-->
-        <!--<div class="card-body">-->
-        <!--<div class="input-group shadow-sm">-->
-        <!--<input type="text" class="form-control rounded-0" placeholder="Search for...">-->
-        <!--<span class="input-group-btn">-->
-        <!--<button class="btn btn-warning text-light rounded-0" type="button">Go!</button>-->
-        <!--</span>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--&lt;!&ndash; Categories Widget &ndash;&gt;-->
-        <!--<div class="card my-4 rounded-0 shadow-sm">-->
-        <!--<h5 class="card-header">Categories</h5>-->
-        <!--<div class="card-body">-->
-
-        <!--<div class="row p-1" th:each="category:${categoriesList}">-->
-        <!--<div class="col-lg-6 py-1">-->
-        <!--<a href="#" class="text-warning" th:text="${category}">Web Design</a>-->
-        <!--</div>-->
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!-- Side Widget -->
-        <!-- <div class="card my-4">
-            <h5 class="card-header">Side Widget</h5>
-            <div class="card-body">
-              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-            </div>
-          </div> -->
 
     </div>
+
+
+    <!-- Sidebar Widgets Column -->
+    <!--<div class="col-md-4">-->
+    <!--<br><br><br>-->
+    <!--&lt;!&ndash; Search Widget &ndash;&gt;-->
+    <!--<div class="card my-4 rounded-0 shadow-sm">-->
+    <!--<h5 class="card-header">Search</h5>-->
+    <!--<div class="card-body">-->
+    <!--<div class="input-group shadow-sm">-->
+    <!--<input type="text" class="form-control rounded-0" placeholder="Search for...">-->
+    <!--<span class="input-group-btn">-->
+    <!--<button class="btn btn-warning text-light rounded-0" type="button">Go!</button>-->
+    <!--</span>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--&lt;!&ndash; Categories Widget &ndash;&gt;-->
+    <!--<div class="card my-4 rounded-0 shadow-sm">-->
+    <!--<h5 class="card-header">Categories</h5>-->
+    <!--<div class="card-body">-->
+
+    <!--<div class="row p-1" th:each="category:${categoriesList}">-->
+    <!--<div class="col-lg-6 py-1">-->
+    <!--<a href="#" class="text-warning" th:text="${category}">Web Design</a>-->
+    <!--</div>-->
+
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!-- Side Widget -->
+    <!-- <div class="card my-4">
+        <h5 class="card-header">Side Widget</h5>
+        <div class="card-body">
+          You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+        </div>
+      </div> -->
+
+</div>
 
 </div>
 <!-- /.row -->

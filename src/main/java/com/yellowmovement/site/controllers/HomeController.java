@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.yellowmovement.site.repositories.PostRepository;
+import com.yellowmovement.site.services.PostService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +23,10 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/home")
 public class HomeController {
 
-    private PostRepository postRepository;
+    private PostService postService;
 
-    public HomeController(PostRepository postRepository){
-        this.postRepository = postRepository;
+    public HomeController(PostService postService){
+        this.postService = postService;
     }
 
     @ModelAttribute("title")
@@ -34,27 +38,25 @@ public class HomeController {
     public List<String> addCategoriesToModel() {
         List<String> categories = new ArrayList<>();
 
-        postRepository.findCategoriesList().forEach(i -> categories.add(i));
+        postService.findCategoriesList().forEach(i -> categories.add(i));
 
         return categories;
     }
 
-    @ModelAttribute("postsList")
-    public List<Post> addPostsToModel() {
-        List<Post> posts = new ArrayList<>();
-        postRepository.findOrderedPosts().forEach(i -> posts.add(i));
+    @GetMapping
+    public String addPostsToModel(@RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "2") int size, Model model){
+        PageRequest pageRequest = PageRequest.of(
+                page,size, Sort.by("postedDate").descending());
 
-        return posts;
+        model.addAttribute("dataList", postService.findAll(pageRequest));
+        model.addAttribute("currentPage", page);
+
+        return "HomePage";
     }
 
     @ModelAttribute("loggedInUser")
     public User addUserToModel(@AuthenticationPrincipal User user) {
         return user;
-    }
-
-    @GetMapping
-    public String home() {
-        return "HomePage";
     }
 
 
@@ -66,9 +68,10 @@ public class HomeController {
 
     @GetMapping("/category")
     public String openPostPage(@RequestParam("keyword") String keyword, Model model){
-        List<Post> postsByQuery = postRepository.searchPosts(keyword);
+        List<Post> postsByQuery = postService.searchPosts(keyword);
 
-        model.addAttribute("postsList", postsByQuery);
+        model.addAttribute("dataList", postsByQuery);
+        model.addAttribute("paginate", "no");
 
         return "HomePage";
     }

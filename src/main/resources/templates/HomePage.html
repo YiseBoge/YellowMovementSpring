@@ -19,11 +19,20 @@
         <div class="col-md-8">
 
             <h1 class="my-4">Welcome <span th:text="${loggedInUser.name}">Public Posts</span>
-                <small class="ml-3 text-warning h4">All Posts</small>
+                <small class="ml-3 text-warning h4" th:text="${param.keyword}">All Posts</small>
+
+                <a class="btn btn-warning d-inline-block hover-shadow float-md-right rounded-0 text-white" th:href="@{/newPost}" th:if="${loggedInUser.getAuthorities()}">Add New</a>
             </h1>
 
+            <div th:if="${dataList.isEmpty()}">
+                <hr/>
+                <p class="lead mb-0 d-inline-block">
+                    Found Nothing
+                </p>
+                <a class="ml-3" th:href="@{/home}">show all...</a>
+            </div>
             <!-- News Post -->
-            <div class="card mb-4 rounded-0 hover-shadow" th:each="post:${postsList}">
+            <div class="card mb-4 rounded-0 hover-shadow" th:each="post:${dataList}">
                 <div class="card-header">
                     <span class="badge badge-pill badge-warning text-light text-capitalize" th:text="${post.category}">category</span>
                 </div>
@@ -37,22 +46,16 @@
                         More
                         &rarr;</a>
                 </div>
-                <div class="card-footer text-muted" th:text="${post.dateString}">
+                <div class="card-footer text-muted" th:text="${post.dateString()}">
                     January 1, 2017
                 </div>
             </div>
 
 
             <!-- Pagination -->
-            <ul class="pagination justify-content-center mb-4">
-                <li class="page-item rounded-0 shadow-sm text-warning border-warning disabled">
-                    <a class="page-link text-warning" href="#">&larr; Newer</a>
-                </li>
-                <li class="page-item rounded-0 shadow-sm text-warning border-warning">
-                    <a class="page-link text-warning active" href="#"> 1 </a>
-                </li>
-                <li class="page-item rounded-0 shadow-sm">
-                    <a class="page-link text-warning" href="#">Older &rarr;</a>
+            <ul class="pagination justify-content-center mb-4 rounded-0" th:if="${paginate} != 'no'">
+                <li class="page-item rounded-0 shadow-sm" th:each="i : ${#numbers.sequence(0,(dataList.totalPages)-1)}">
+                    <a class="page-link text-warning" th:href="@{/home(page=${i})}" th:text="${i + 1}" th:classappend="${currentPage}==${i}?'active':''"></a>
                 </li>
             </ul>
 
