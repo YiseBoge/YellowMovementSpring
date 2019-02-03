@@ -25,6 +25,11 @@ public class HomeController {
         this.postRepository = postRepository;
     }
 
+    @ModelAttribute("title")
+    public String addPageTitle() {
+        return "Home - News and Announcements";
+    }
+
     @ModelAttribute("categoriesList")
     public List<String> addCategoriesToModel() {
         List<String> categories = new ArrayList<>();

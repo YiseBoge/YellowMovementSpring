@@ -9,6 +9,10 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+.content-holder{
+    min-height: 84vh;
+}
+
 .carousel-item {
     height: 95vh;
     min-height: 300px;

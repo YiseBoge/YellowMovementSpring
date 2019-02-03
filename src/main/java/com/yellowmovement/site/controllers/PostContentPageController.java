@@ -40,6 +40,8 @@ public class PostContentPageController {
 
         if (currentPost.isPresent()){
             model.addAttribute("currentPost", currentPost.get());
+
+            model.addAttribute("title", currentPost.get().getTitle());
         }
 
         return "PostContentPage";

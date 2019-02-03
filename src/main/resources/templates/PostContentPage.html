@@ -1,75 +1,17 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title th:text="${currentPost.title}"></title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Yatra+One" rel="stylesheet"> -->
-
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/css/custom.css" rel="stylesheet">
-
-</head>
+<head th:replace="fragments/fragments :: head"></head>
 
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-warning fixed-top shadow-lg">
-    <div class="container">
+<nav th:replace="fragments/fragments :: nav-bar"></nav>
 
-        <a class="navbar-brand" th:href="@{/}">YELLOW MOVEMENT</a>
-        <button class="navbar-toggler hover-shadow" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li sec:authorize="isAuthenticated()" class="nav-item active">
-                    <a class="nav-link" th:href="@{/home}">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <!--<li sec:authorize="isAuthenticated()" class="nav-item">-->
-                    <!--<a class="nav-link" href="#">Blog</a>-->
-                <!--</li>-->
-
-
-                <li sec:authorize="isAuthenticated()" class="nav-item ml-2 pl-2 border border-light border-top-0 border-bottom-0 border-right-0 text-white">
-                    <span class="nav-link text-light" th:text="${loggedInUser.name}"> </span>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item dropdown" style="margin-top: -4%; margin-bottom: -3%">
-                    <a id="dropDownImg" href="#" class="dropdown-toggle nav-link d-inline-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="shadow-sm rounded-circle d-inline-block border border-light"
-                             th:src="@{'/img/profile_pictures/'+${loggedInUser.profilePic}}" width="38px" height="38px" alt="Card image cap" >
-                    </a>
-                    <div class="dropdown-menu rounded-0" aria-labelledby="dropDownImg">
-                        <a class="dropdown-item" th:href="@{/profile}"><i class="fas fa-user-alt d-inline-block mr-2"> </i>  My Profile</a>
-                        <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt d-inline-block mr-2"> </i>  Sign out</a>
-                    </div>
-                </li>
-
-
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container content-holder">
 
 
     <div class="row">
@@ -90,7 +32,8 @@
 
             <!-- Preview Image -->
 
-            <img class="d-inline-block rounded-0 shadow-sm" style="width: 100%; height: auto" th:src="@{/img/franknmatt.jpg}" th:alt="${currentPost.title}">
+            <img class="d-inline-block rounded-0 shadow-sm" style="width: 100%; height: auto"
+                 th:alt="${currentPost.title}" th:src="@{/img/franknmatt.jpg}">
 
             <hr>
 
@@ -103,20 +46,20 @@
 
             <!-- Comments Form -->
             <!--<div class="card my-4 rounded-0">-->
-                <!--<h5 class="card-header">Leave a Comment:</h5>-->
-                <!--<div class="card-body">-->
-                    <!--<form>-->
-                        <!--<div class="form-group">-->
-                            <!--<textarea class="form-control rounded-0" rows="3"></textarea>-->
-                        <!--</div>-->
-                        <!--<button type="submit" class="btn btn-outline-warning rounded-0 hover-shadow">Submit</button>-->
-                    <!--</form>-->
-                <!--</div>-->
+            <!--<h5 class="card-header">Leave a Comment:</h5>-->
+            <!--<div class="card-body">-->
+            <!--<form>-->
+            <!--<div class="form-group">-->
+            <!--<textarea class="form-control rounded-0" rows="3"></textarea>-->
+            <!--</div>-->
+            <!--<button type="submit" class="btn btn-outline-warning rounded-0 hover-shadow">Submit</button>-->
+            <!--</form>-->
+            <!--</div>-->
             <!--</div>-->
 
             <!-- Single Comment -->
             <div class="media mb-4">
-                <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                <img alt="" class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50">
                 <div class="media-body">
                     <h5 class="mt-0">Commenter Name</h5>
                     Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras
@@ -132,70 +75,58 @@
 
         <!-- Sidebar Widgets Column -->
         <!--<div class="col-md-4">-->
-            <!--<br><br><br>-->
-            <!--&lt;!&ndash; Search Widget &ndash;&gt;-->
-            <!--<div class="card my-4 rounded-0 shadow-sm">-->
-                <!--<h5 class="card-header">Search</h5>-->
-                <!--<div class="card-body">-->
-                    <!--<div class="input-group shadow-sm">-->
-                        <!--<input type="text" class="form-control rounded-0" placeholder="Search for...">-->
-                        <!--<span class="input-group-btn">-->
-                  <!--<button class="btn btn-warning text-light rounded-0" type="button">Go!</button>-->
-                <!--</span>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+        <!--<br><br><br>-->
+        <!--&lt;!&ndash; Search Widget &ndash;&gt;-->
+        <!--<div class="card my-4 rounded-0 shadow-sm">-->
+        <!--<h5 class="card-header">Search</h5>-->
+        <!--<div class="card-body">-->
+        <!--<div class="input-group shadow-sm">-->
+        <!--<input type="text" class="form-control rounded-0" placeholder="Search for...">-->
+        <!--<span class="input-group-btn">-->
+        <!--<button class="btn btn-warning text-light rounded-0" type="button">Go!</button>-->
+        <!--</span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
-            <!--&lt;!&ndash; Categories Widget &ndash;&gt;-->
-            <!--<div class="card my-4 rounded-0 shadow-sm">-->
-                <!--<h5 class="card-header">Categories</h5>-->
-                <!--<div class="card-body">-->
+        <!--&lt;!&ndash; Categories Widget &ndash;&gt;-->
+        <!--<div class="card my-4 rounded-0 shadow-sm">-->
+        <!--<h5 class="card-header">Categories</h5>-->
+        <!--<div class="card-body">-->
 
-                    <!--<div class="row p-1" th:each="category:${categoriesList}">-->
-                        <!--<div class="col-lg-6 py-1">-->
-                            <!--<a href="#" class="text-warning" th:text="${category}">Web Design</a>-->
-                        <!--</div>-->
+        <!--<div class="row p-1" th:each="category:${categoriesList}">-->
+        <!--<div class="col-lg-6 py-1">-->
+        <!--<a href="#" class="text-warning" th:text="${category}">Web Design</a>-->
+        <!--</div>-->
 
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
 
 
-            <!-- Side Widget -->
-            <!-- <div class="card my-4">
-                <h5 class="card-header">Side Widget</h5>
-                <div class="card-body">
-                  You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
-                </div>
-              </div> -->
-
-        </div>
+        <!-- Side Widget -->
+        <!-- <div class="card my-4">
+            <h5 class="card-header">Side Widget</h5>
+            <div class="card-body">
+              You can put anything you want inside of these side widgets. They are easy to use, and feature the new Bootstrap 4 card containers!
+            </div>
+          </div> -->
 
     </div>
-    <!-- /.row -->
+
+</div>
+<!-- /.row -->
 
 </div>
 <!-- /.container -->
 
+
 <!-- Footer -->
-<footer class="py-5 bg-warning">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-    </div>
-    <!-- /.container -->
-</footer>
+<footer th:replace="fragments/fragments :: footer"></footer>
 
-<!-- Bootstrap core JavaScript -->
-<script th:href="@{/js/jquery.min.js}" src="../js/jquery.min.js"></script>
-<script th:href="@{/js/jquery.validate.min.js}" src="../js/jquery.validate.min.js"></script>
-<script th:href="@{/js/bootstrap.bundle.min.js}" src="/js/bootstrap.bundle.min.js"></script>
+<!-- JavaScript Imports -->
+<div th:replace="fragments/fragments :: js-imports"></div>
 
-<script th:href="@{/js/modal.js}" src="../js/modal.js"></script>
-<script th:href="@{/js/animate.js}" src="../js/animate.js"></script>
-<script th:href="@{/js/validation.js}" src="../js/validation.js"></script>
-
-<script th:href="@{/js/popper.min.js}" src="../js/popper.min.js"></script>
-<script th:href="@{/js/holder.min.js}" src="../js/holder.min.js"></script>
 
 </body>
 

@@ -22,6 +22,11 @@ public class WelcomeController {
     @Autowired
     private UserService userService;
 
+    @ModelAttribute("title")
+    public String addPageTitle() {
+        return "Welcome to the Yellow Movement";
+    }
+
     @ModelAttribute(name="account")
     public User user() {
         return new User();

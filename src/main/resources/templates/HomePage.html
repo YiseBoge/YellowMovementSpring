@@ -1,75 +1,17 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Home - Announcement Posts</title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-          integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
-    <!-- <link href="https://fonts.googleapis.com/css?family=Yatra+One" rel="stylesheet"> -->
-
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/css/custom.css" rel="stylesheet">
-
-</head>
+<head th:replace="fragments/fragments :: head"></head>
 
 <body>
 
-<!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-warning fixed-top shadow-lg">
-    <div class="container">
+<nav th:replace="fragments/fragments :: nav-bar"></nav>
 
-        <a class="navbar-brand" th:href="@{/}">YELLOW MOVEMENT</a>
-        <button class="navbar-toggler hover-shadow" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li sec:authorize="isAuthenticated()" class="nav-item active">
-                    <a class="nav-link" th:href="@{/home}">Home
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <!--<li sec:authorize="isAuthenticated()" class="nav-item">-->
-                    <!--<a class="nav-link" href="#">Blog</a>-->
-                <!--</li>-->
-
-
-                <li sec:authorize="isAuthenticated()" class="nav-item ml-2 pl-2 border border-light border-top-0 border-bottom-0 border-right-0 text-white">
-                    <span class="nav-link text-light" th:text="${loggedInUser.name}"> </span>
-                </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item dropdown" style="margin-top: -4%; margin-bottom: -3%">
-                    <a id="dropDownImg" href="#" class="dropdown-toggle nav-link d-inline-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="shadow-sm rounded-circle d-inline-block border border-light"
-                             th:src="@{'/img/profile_pictures/'+${loggedInUser.profilePic}}" width="38px" height="38px" alt="Card image cap" >
-                    </a>
-                    <div class="dropdown-menu rounded-0" aria-labelledby="dropDownImg">
-                        <a class="dropdown-item" th:href="@{/profile}"><i class="fas fa-user-alt d-inline-block mr-2"> </i>  My Profile</a>
-                        <a class="dropdown-item" th:href="@{/logout}"><i class="fas fa-sign-out-alt d-inline-block mr-2"> </i>  Sign out</a>
-                    </div>
-                </li>
-
-
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <!-- Page Content -->
-<div class="container">
+<div class="container content-holder">
     <!-- <h1 class="my-4">Welcome <span th:text="${loggedInUser}"></span> </h1> -->
     <div class="row">
 
@@ -81,17 +23,18 @@
             </h1>
 
             <!-- News Post -->
-            <div th:each="post:${postsList}" class="card mb-4 rounded-0 hover-shadow">
+            <div class="card mb-4 rounded-0 hover-shadow" th:each="post:${postsList}">
                 <div class="card-header">
                     <span class="badge badge-pill badge-warning text-light text-capitalize" th:text="${post.category}">category</span>
                 </div>
-                <img class="card-img-top rounded-0" th:src="@{/img/franknmatt.jpg}" alt="Card image cap">
+                <img alt="Card image cap" class="card-img-top rounded-0" th:src="@{/img/franknmatt.jpg}">
                 <div class="card-body">
                     <h2 class="card-title" th:text="${post.title}">Post Title</h2>
                     <p class="card-text" th:text="${post.content}">Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita
                         corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
-                    <a th:href="@{'/post/' + ${post.postId}}" class="btn btn-outline-warning rounded-0 hover-shadow">Read More
+                    <a class="btn btn-outline-warning rounded-0 hover-shadow" th:href="@{'/post/' + ${post.postId}}">Read
+                        More
                         &rarr;</a>
                 </div>
                 <div class="card-footer text-muted" th:text="${post.dateString}">
@@ -124,7 +67,8 @@
                 <div class="card-body">
                     <form action="/home/category" method="get">
                         <div class="input-group shadow-sm">
-                            <input type="text" class="form-control  rounded-0" name="keyword" id="searchBar" placeholder="Search for...">
+                            <input class="form-control  rounded-0" id="searchBar" name="keyword" placeholder="Search for..."
+                                   type="text">
                             <span class="input-group-btn">
                             <button class="btn btn-warning text-light rounded-0" type="submit">Go!</button>
                         </span>
@@ -140,7 +84,8 @@
 
                     <div class="row p-1" th:each="category:${categoriesList}">
                         <div class="col-lg-6 py-1">
-                            <a th:href="@{'/home/category?keyword=' + ${category}}" class="text-warning" th:text="${category}">Web Design</a>
+                            <a class="text-warning" th:href="@{'/home/category?keyword=' + ${category}}"
+                               th:text="${category}">Web Design</a>
                         </div>
 
                     </div>
@@ -164,25 +109,13 @@
 </div>
 <!-- /.container -->
 
+
 <!-- Footer -->
-<footer class="py-5 bg-warning">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-    </div>
-    <!-- /.container -->
-</footer>
+<footer th:replace="fragments/fragments :: footer"></footer>
 
-<!-- Bootstrap core JavaScript -->
-<script th:href="@{/js/jquery.min.js}" src="../js/jquery.min.js"></script>
-<script th:href="@{/js/jquery.validate.min.js}" src="../js/jquery.validate.min.js"></script>
-<script th:href="@{/js/bootstrap.bundle.min.js}" src="/js/bootstrap.bundle.min.js"></script>
+<!-- JavaScript Imports -->
+<div th:replace="fragments/fragments :: js-imports"></div>
 
-<script th:href="@{/js/modal.js}" src="../js/modal.js"></script>
-<script th:href="@{/js/animate.js}" src="../js/animate.js"></script>
-<script th:href="@{/js/validation.js}" src="../js/validation.js"></script>
-
-<script th:href="@{/js/popper.min.js}" src="../js/popper.min.js"></script>
-<script th:href="@{/js/holder.min.js}" src="../js/holder.min.js"></script>
 
 </body>
 
