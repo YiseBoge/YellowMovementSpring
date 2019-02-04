@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -22,15 +23,18 @@ public class Post {
     private Long postId;
 
     @NotNull
+    @NotBlank(message = "The title is required.")
     private String title;
 
     @NotNull
+    @NotBlank(message = "Please provide the content.")
     private String content;
 
     @NotNull
+    @NotBlank(message = "Please provide the category.")
     private String category;
 
-    @Column(columnDefinition="varchar(50) default NULL")
+    @Column(columnDefinition="varchar(255) default NULL")
     private String image;
 
     private Date postedDate;

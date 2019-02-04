@@ -21,7 +21,7 @@
             <h1 class="my-4">Welcome <span th:text="${loggedInUser.name}">Public Posts</span>
                 <small class="ml-3 text-warning h4" th:text="${param.keyword}">All Posts</small>
 
-                <a class="btn btn-warning d-inline-block hover-shadow float-md-right rounded-0 text-white" th:href="@{/newPost}" th:if="${loggedInUser.getAuthorities()}">Add New</a>
+                <a class="btn btn-warning d-inline-block hover-shadow float-md-right rounded-0 text-white" sec:authorize="hasAuthority('ADMIN')" th:href="@{/post/new}">Add New<i class="fas fa-plus d-inline-block ml-2"></i></a>
             </h1>
 
             <div th:if="${dataList.isEmpty()}">
@@ -36,7 +36,7 @@
                 <div class="card-header">
                     <span class="badge badge-pill badge-warning text-light text-capitalize" th:text="${post.category}">category</span>
                 </div>
-                <img alt="Card image cap" class="card-img-top rounded-0" th:src="@{/img/franknmatt.jpg}">
+                <img alt="Card image cap" class="card-img-top rounded-0" th:if="${post.image} != null" th:src="@{'/uploads/post-images/'+${post.image} }">
                 <div class="card-body">
                     <h2 class="card-title" th:text="${post.title}">Post Title</h2>
                     <p class="card-text" th:text="${post.content}">Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -55,7 +55,7 @@
             <!-- Pagination -->
             <ul class="pagination justify-content-center mb-4 rounded-0" th:if="${paginate} != 'no'">
                 <li class="page-item rounded-0 shadow-sm" th:each="i : ${#numbers.sequence(0,(dataList.totalPages)-1)}">
-                    <a class="page-link text-warning" th:href="@{/home(page=${i})}" th:text="${i + 1}" th:classappend="${currentPage}==${i}?'active':''"></a>
+                    <a class="page-link" th:href="@{/home(page=${i})}" th:text="${i + 1}" th:classappend="${currentPage}==${i}?'bg-warning text-white':'text-warning'"></a>
                 </li>
             </ul>
 

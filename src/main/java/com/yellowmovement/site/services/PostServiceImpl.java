@@ -7,7 +7,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +20,7 @@ import java.util.Optional;
 public class PostServiceImpl implements PostService {
 
     PostRepository postRepository;
+    String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/uploads/post-images";
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository) {
@@ -37,9 +43,36 @@ public class PostServiceImpl implements PostService {
         return postRepository.findCategoriesList();
     }
 
+
     @Override
     public Post save(Post post) {
-        return postRepository.save(post);
+            return postRepository.save(post);
+    }
+
+
+    @Override
+    public Post save(Post post, MultipartFile file) {
+
+        if (!file.isEmpty()) {
+            try {
+                if (!Files.exists(Paths.get(uploadDirectory))) {
+                    try {
+                        Files.createDirectories(Paths.get(uploadDirectory));
+                    } catch (IOException ioe) {
+                        ioe.printStackTrace();
+                    }
+                }
+                Files.copy(file.getInputStream(), Paths.get(uploadDirectory, file.getOriginalFilename()));
+                post.setImage(file.getOriginalFilename());
+
+                postRepository.save(post);
+
+            } catch (IOException | RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return null;
     }
 
     @Override

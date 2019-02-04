@@ -43,9 +43,8 @@
 
 
                 <!--Navbar Items if Logged In-->
-                <li class="nav-item active" sec:authorize="isAuthenticated()">
+                <li class="nav-item" sec:authorize="isAuthenticated()">
                     <a class="nav-link" th:href="@{/home}">Home
-                        <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <!--<li sec:authorize="isAuthenticated()" class="nav-item">-->
@@ -64,7 +63,7 @@
                        href="#" id="dropDownImg">
                         <img alt="Card image cap"
                              class="shadow-sm rounded-circle d-inline-block border border-light" height="38px"
-                             th:src="@{'/img/profile_pictures/'+${loggedInUser.profilePic}}"
+                             th:src="@{'/uploads/profile_pictures/'+${loggedInUser.profilePic}}"
                              width="38px">
                     </a>
                     <div aria-labelledby="dropDownImg" class="dropdown-menu rounded-0">

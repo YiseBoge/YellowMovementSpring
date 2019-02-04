@@ -44,7 +44,7 @@ public class HomeController {
     }
 
     @GetMapping
-    public String addPostsToModel(@RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "2") int size, Model model){
+    public String addPostsToModel(@RequestParam(name = "page", defaultValue = "0") int page, @RequestParam(name = "size", defaultValue = "4") int size, Model model){
         PageRequest pageRequest = PageRequest.of(
                 page,size, Sort.by("postedDate").descending());
 

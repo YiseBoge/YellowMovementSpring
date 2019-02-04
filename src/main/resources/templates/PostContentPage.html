@@ -33,7 +33,7 @@
             <!-- Preview Image -->
 
             <img class="d-inline-block rounded-0 shadow-sm" style="width: 100%; height: auto"
-                 th:alt="${currentPost.title}" th:src="@{/img/franknmatt.jpg}">
+                 th:alt="${currentPost.title}" th:if="${currentPost.image} != null" th:src="@{'/uploads/post-images/'+${currentPost.image} }"/>
 
             <hr>
 
@@ -44,7 +44,7 @@
             <hr>
 
 
-            <div class="ml-md-3 col-md-8 my-4" style="max-height: 30vh !important; overflow-y: scroll">
+            <div class="ml-md-3 col-md-8 my-4 shadow-sm" style="max-height: 30vh !important; overflow-y: scroll">
 
                 <div class="media mb-4" th:each="comment:${currentPost.comments}">
 
@@ -54,16 +54,15 @@
 
                         <h5 class="mt-0" th:text="${comment.getCommenter().getName()}">commenter name </h5>
 
-
                         <p class="col-md-8 my-0" th:text="${comment.getContent()}">post content</p>
 
-
-
                         <p class="text-muted d-block" th:text="${comment.dateString()}">comment date</p>
+                        <hr/>
                     </div>
 
 
                 </div>
+
             </div>
 
             <div class="card col-md-8 my-4 ml-md-3 rounded-0 px-0">

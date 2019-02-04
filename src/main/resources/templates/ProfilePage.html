@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-inline-block border border-warning rounded-circle shadow-lg mb-4"
-                             th:style="'background-image:url(' + @{'/img/profile_pictures/'+${loggedInUser.profilePic}} + ');width: 300px; height: 300px; background-size: cover; background-position: center; border:5px; margin-top: -150px;'"></div>
+                             th:style="'background-image:url(' + @{'/uploads/profile_pictures/'+${loggedInUser.profilePic}} + ');width: 300px; height: 300px; background-size: cover; background-position: center; border:5px; margin-top: -150px;'"></div>
                     </div>
                 </div>
 
@@ -88,12 +88,12 @@
                                 class="fas fa-user-edit d-inline-block mr-2"></i> Edit Profile
                         </a>
                     </div>
-                    <div class="col-md">
-                        <a class="btn btn-link text-muted" data-target="#changePasswordModal" data-toggle="modal"
-                           th:href="@{#}"><i
-                                class="fas fa-key d-inline-block mr-2"> </i> Change Password
-                        </a>
-                    </div>
+                    <!--<div class="col-md">-->
+                        <!--<a class="btn btn-link text-muted" data-target="#changePasswordModal" data-toggle="modal"-->
+                           <!--th:href="@{#}"><i-->
+                                <!--class="fas fa-key d-inline-block mr-2"> </i> Change Password-->
+                        <!--</a>-->
+                    <!--</div>-->
                 </div>
 
             </div>
@@ -102,12 +102,12 @@
             <div class="container col-md-4"
                  id="profileEditRegion"
                  th:if="${(param.performing != null) and ((param.performing[0] == 'edit') or (param.performing[0] == 'uploadImg')) }">
-                <form action="#" method="POST" th:object="${loggedInUser}">
+                <form action="profile/edit" method="POST" th:object="${loggedInUser}">
 
                     <div class="row">
                         <div class="col-md-12">
                             <div class="d-inline-block border border-warning rounded-circle shadow-lg mb-4"
-                                 th:style="'background-image:url(' + @{'/img/profile_pictures/'+${loggedInUser.profilePic}} + ');width: 300px; height: 300px; background-size: cover; background-position: center; border:5px; margin-top: -150px;'">
+                                 th:style="'background-image:url(' + @{'/uploads/profile_pictures/'+${loggedInUser.profilePic}} + ');width: 300px; height: 300px; background-size: cover; background-position: center; border:5px; margin-top: -150px;'">
                                 <a class="d-inline-block text-white bg-warning display-4 rounded-circle"
                                    style="width: 300px; height: 300px; opacity: 0.4; line-height: 300px; color: #FFF;"
                                    th:href="@{/profile/uploadImg}"><i
@@ -260,7 +260,7 @@
      th:if="${(param.performing != null) and (param.performing[0] == 'uploadImg')}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
-            <form action="/uploadProfileImg" class="container p-3" id="uploadImgForm" method="post">
+            <form action="/profile/uploadImg" class="container p-3" id="uploadImgForm" method="POST" enctype="multipart/form-data">
                 <div class="modal-header">
                     <h5 class="modal-title" id="uploadImgModalTitle">Edit Profile Image</h5>
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
@@ -273,25 +273,22 @@
                          th:if="${param.error}">
                         Could not Upload .
                     </div>
-                    <div class="form-group my-4 shadow d-inline-block" id="previewImage"
-                         th:style="'background-image:url(' + @{'/img/profile_pictures/'+${loggedInUser.profilePic}} + ');width: 350px; height: 350px; background-size: cover; background-position: center; border:5px; margin-top: -150px;'">
-
-                    </div>
+                    <img id="previewImage" class="form-group my-4 shadow d-inline-block w-100"
+                         th:src="@{'/uploads/profile_pictures/'+${loggedInUser.profilePic}}"/>
 
                     <div class="form-group mb-3">
 
                         <div class="row">
                             <div class="col">
-                                <label class="btn btn-warning text-white form-control rounded-0 mx-5 hover-shadow">
-                                    Browse <input hidden id="updateProfileImgSelector"
-                                                  onchange="readPreviewURL(this);" type="file">
+                                <label class="btn btn-warning text-white rounded-0 hover-shadow form-control">
+                                    Browse <input type="file" name="file" onchange="readPreviewURL(this)" id="file" hidden>
                                 </label>
                             </div>
-                            <div class="col">
-                                <a class="btn btn-outline-danger hover-shadow rounded-0 hover-shadow" id="removeImg"
-                                   th:href="@{#}">Remove Image
-                                </a>
-                            </div>
+                            <!--<div class="col">-->
+                                <!--<a class="btn btn-outline-danger hover-shadow rounded-0 hover-shadow" id="removeImg"-->
+                                   <!--th:href="@{#}">Remove Image-->
+                                <!--</a>-->
+                            <!--</div>-->
                         </div>
 
 

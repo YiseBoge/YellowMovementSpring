@@ -9,7 +9,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -17,6 +22,7 @@ import java.util.HashSet;
 public class UserServiceImpl implements UserService {
 
 
+    String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/uploads/profile_pictures";
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -50,6 +56,39 @@ public class UserServiceImpl implements UserService {
         Role userRole = roleRepository.findByRole("USER");
         user.setRoles(new HashSet<Role>(Arrays.asList(userRole)));
         userRepository.save(user);
+    }
+
+    @Override
+    public User save(User user) {
+        return userRepository.save(user);
+    }
+
+    @Override
+    public boolean uploadImage(User user, MultipartFile file) {
+        if (!file.isEmpty()) {
+            try {
+                if (!Files.exists(Paths.get(uploadDirectory))) {
+                    try {
+                        Files.createDirectories(Paths.get(uploadDirectory));
+                    } catch (IOException ioe) {
+                        ioe.printStackTrace();
+                        return false;
+                    }
+                }
+                Files.copy(file.getInputStream(), Paths.get(uploadDirectory, file.getOriginalFilename()));
+                user.setProfilePic(file.getOriginalFilename());
+                userRepository.save(user);
+                return true;
+
+            } catch (FileAlreadyExistsException e){
+                user.setProfilePic(file.getOriginalFilename());
+                save(user);
+                return true;
+            } catch (IOException | RuntimeException e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
     }
 
     @Override

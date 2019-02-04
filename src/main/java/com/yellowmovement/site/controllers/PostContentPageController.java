@@ -5,7 +5,8 @@ import com.yellowmovement.site.domains.Comment;
 import com.yellowmovement.site.domains.Post;
 import com.yellowmovement.site.repositories.CommentRepisotory;
 import com.yellowmovement.site.security.User;
-import com.yellowmovement.site.repositories.PostRepository;
+import com.yellowmovement.site.services.CommentService;
+import com.yellowmovement.site.services.PostService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,12 @@ import java.util.Optional;
 @RequestMapping("/post")
 public class PostContentPageController {
 
-    private PostRepository postRepository;
-    private CommentRepisotory commentRepisotory;
+    private PostService postService;
+    private CommentService commentService;
 
-    public PostContentPageController(PostRepository postRepository, CommentRepisotory commentRepisotory){
-        this.postRepository = postRepository;
-        this.commentRepisotory = commentRepisotory;
+    public PostContentPageController(PostService postService, CommentService commentService){
+        this.postService = postService;
+        this.commentService = commentService;
     }
 
 
@@ -43,7 +44,7 @@ public class PostContentPageController {
 
     @GetMapping("/{postId}")
     public String openPostPage(@PathVariable("postId") Long postId, Model model){
-        Optional<Post> currentPost = postRepository.findById(postId);
+        Optional<Post> currentPost = postService.findById(postId);
 
         if (currentPost.isPresent()){
             model.addAttribute("currentPost", currentPost.get());
@@ -57,7 +58,7 @@ public class PostContentPageController {
 
     @PostMapping("/comment")
     public String openPostPage(@Valid @ModelAttribute("comment") Comment comment, Errors errors, @RequestParam("postId") Long postId, @AuthenticationPrincipal User user, Model model){
-        Optional<Post> currentPost = postRepository.findById(postId);
+        Optional<Post> currentPost = postService.findById(postId);
         Post post = currentPost.get();;
 
 
@@ -72,10 +73,10 @@ public class PostContentPageController {
 
         comment.setCommenter(user);
 
-        commentRepisotory.save(comment);
+        commentService.save(comment);
         post.getComments().add(comment);
 
-        postRepository.save(post);
+        postService.save(post);
 
         model.addAttribute("comment", new Comment());
 
