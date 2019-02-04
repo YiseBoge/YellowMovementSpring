@@ -48,7 +48,7 @@ public class UserServiceTest {
 	@Test
 	public void saveUser() {
 		 final User u = new User("one","a@gmal.com",1,"0000","male");
-		 Mockito.when(rolereposity.findByRole("USER")).thenReturn(new Role("USER"));
+		 Mockito.when(rolereposity.findByRole("USER")).thenReturn(new Role((long) 1,"USER"));
 		 Mockito.when(userRepository.findByEmail(u.getEmail())).thenReturn(u);
 		 Mockito.when(userRepository.save(u)).thenReturn(u);
 		 assertThat(userserviceimpl.findUserByEmail(u.getEmail())).isEqualTo(u);
