@@ -8,15 +8,18 @@ import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Data
 @Entity
+@AllArgsConstructor
 @Table(name="posts")
 public class Post {
 
+	public Post() {}
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long postId;
