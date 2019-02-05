@@ -43,21 +43,29 @@
 
 
                 <!--Navbar Items if Logged In-->
-                <li class="nav-item" sec:authorize="isAuthenticated()">
-                    <a class="nav-link" th:href="@{/home}">Home
+                <li class="nav-item" sec:authorize="isAuthenticated()" th:classappend="${title.split(' ')[0]} == 'Home'?'active':''">
+                    <a class="nav-link" th:href="@{/home}">Posts
                     </a>
                 </li>
-                <!--<li sec:authorize="isAuthenticated()" class="nav-item">-->
-                <!--<a class="nav-link" href="#">Blog</a>-->
-                <!--</li>-->
-
+                <li class="nav-item" sec:authorize="isAuthenticated()" th:classappend="${title.split(' ')[0]} == 'Blogs'?'active':''">
+                    <a class="nav-link" th:href="@{/blog}">Blogs
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/#info}">About
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/#contact}">Contact
+                    </a>
+                </li>
 
                 <li class="nav-item ml-2 pl-2 border border-light border-top-0 border-bottom-0 border-right-0 text-white"
                     sec:authorize="isAuthenticated()">
                     <span class="nav-link text-light" th:text="${loggedInUser.name}"> </span>
                 </li>
                 <li class="nav-item dropdown" sec:authorize="isAuthenticated()"
-                    style="margin-top: -4%; margin-bottom: -3%">
+                    style="margin-top: -8px; margin-bottom: -5px">
                     <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle nav-link d-inline-block"
                        data-toggle="dropdown"
                        href="#" id="dropDownImg">

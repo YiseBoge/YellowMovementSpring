@@ -22,6 +22,11 @@ public class AddPostController {
         this.postService = postService;
     }
 
+    @ModelAttribute("title")
+    public String addPageTitle() {
+        return "New Post - Post new News";
+    }
+
     @ModelAttribute("loggedInUser")
     public User addUserToModel(@AuthenticationPrincipal User user) {
         return user;

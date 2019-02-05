@@ -1,6 +1,5 @@
 package com.yellowmovement.site.services;
 
-import com.yellowmovement.site.domains.Post;
 import com.yellowmovement.site.security.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.multipart.MultipartFile;

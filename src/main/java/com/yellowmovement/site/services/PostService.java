@@ -14,8 +14,6 @@ public interface PostService {
 
     List<Post> searchPosts(@Param("keyword") String keyword);
 
-    List<Post> findOrderedPosts();
-
     List<String> findCategoriesList();
 
     public Post save(Post post);

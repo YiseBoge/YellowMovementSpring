@@ -22,7 +22,7 @@ import java.util.HashSet;
 public class UserServiceImpl implements UserService {
 
 
-    String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/uploads/profile_pictures";
+    String uploadDirectory = System.getProperty("user.dir") + "/src/main/resources/static/uploads/profile_pictures/";
     private UserRepository userRepository;
     private RoleRepository roleRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;

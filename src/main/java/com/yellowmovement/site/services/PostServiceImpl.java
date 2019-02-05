@@ -34,11 +34,6 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<Post> findOrderedPosts() {
-        return postRepository.findOrderedPosts();
-    }
-
-    @Override
     public List<String> findCategoriesList() {
         return postRepository.findCategoriesList();
     }

@@ -16,9 +16,9 @@
 
         <br/>
         <br/>
-        <h4>Post New News</h4>
+        <h4>Write a New Blog</h4>
         <hr />
-        <form th:action="@{/post/new}" th:object="${newPost}" method="POST" enctype="multipart/form-data">
+        <form th:action="@{/blog/new}" th:object="${newBlog}" method="POST" enctype="multipart/form-data">
 
             <div class="row">
                 <div class="col-md-8">
@@ -36,19 +36,6 @@
 
                     </div>
 
-
-                    <div class="form-group col-md-12">
-                        <label class="form-check-label col-md-2" for="category">Name: </label>
-                        <div class="col-md-10">
-                            <input class="form-control rounded-0 shadow-sm col-md-12" id="category" name="category" placeholder="Category"
-                                   th:field="*{category}"
-                                   type="text">
-                            <span class="text-danger"
-                                  th:errors="*{category}"
-                                  th:if="${#fields.hasErrors('category')}">Category Error</span>
-                        </div>
-
-                    </div>
 
                     <div class="form-group col-md-12">
                         <label class="form-check-label col-md-2" for="content">Name: </label>
