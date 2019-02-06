@@ -4,18 +4,19 @@ spring:
   boot:
     admin:
       client:
-        url: http://localhost:9090
+        url: https://yellow-movement-admin.cfapps.io
 
   datasource:
-    url: jdbc:mysql://localhost:3306/yellow_movement_site
+    url: jdbc:mysql://localhost/yellow_movement_site
     username: yellow_movement_user
     password: P@$$w0rd
+    driverClassName: com.mysql.cj.jdbc.Driver
     initialization-mode: always
 
   jpa:
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     database: mysql
     show-sql: true
 
@@ -40,4 +41,4 @@ management:
   endpoints:
     web:
       exposure:
-        include: health,info,beans,conditions
+        include: "*"
