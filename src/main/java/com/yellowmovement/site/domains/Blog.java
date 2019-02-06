@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -22,24 +23,26 @@ public class Blog {
     private Long blogId;
 
     @NotNull
+    @NotBlank
     private String title;
 
     @NotNull
+    @NotBlank
+    @Lob
     private String content;
 
-    @Column(columnDefinition="varchar(50) default NULL")
     private String image;
 
     private Date bloggedDate;
 
-    private String dateString;
-
     @PrePersist
     void postedDate() {
-        SimpleDateFormat format = new SimpleDateFormat("h:mm a - EEE, MMM d");
-
         this.bloggedDate = new Date();
-        this.dateString = format.format(this.bloggedDate);
+    }
+
+    public String dateString(){
+        SimpleDateFormat format = new SimpleDateFormat("h:mm a - EEE, MMM d");
+        return format.format(this.bloggedDate);
     }
 
     @ManyToOne
