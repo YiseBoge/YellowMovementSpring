@@ -49,6 +49,9 @@ public class HomeController {
                 page,size, Sort.by("postedDate").descending());
 
         model.addAttribute("dataList", postService.findAll(pageRequest));
+        if (postService.findAll(pageRequest).isEmpty()){
+            model.addAttribute("paginate", "no");
+        }
         model.addAttribute("currentPage", page);
 
         return "HomePage";

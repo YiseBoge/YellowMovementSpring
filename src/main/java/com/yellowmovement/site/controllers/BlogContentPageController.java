@@ -79,7 +79,7 @@ public class BlogContentPageController {
 
         model.addAttribute("comment", new Comment());
 
-        return "BlogContentPage";
+        return "redirect:/blog/"+blogId;
     }
 
 

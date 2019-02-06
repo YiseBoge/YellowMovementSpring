@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -62,12 +63,16 @@ public class PostServiceImpl implements PostService {
 
                 postRepository.save(post);
 
-            } catch (IOException | RuntimeException e) {
+            } catch (FileAlreadyExistsException e){
+                post.setImage(file.getOriginalFilename());
+                postRepository.save(post);
+            }
+            catch (IOException | RuntimeException e) {
                 e.printStackTrace();
             }
         }
 
-        return null;
+        return postRepository.save(post);
     }
 
     @Override

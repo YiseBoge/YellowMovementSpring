@@ -45,6 +45,9 @@ public class BlogController {
                 page,size, Sort.by("bloggedDate").descending());
 
         model.addAttribute("dataList", blogService.findAll(pageRequest));
+        if (blogService.findAll(pageRequest).isEmpty()){
+            model.addAttribute("paginate", "no");
+        }
         model.addAttribute("currentPage", page);
 
         return "BlogsPage";

@@ -12,4 +12,10 @@ public interface UserService extends UserDetailsService {
     public User save(User post);
 
     boolean uploadImage(User user, MultipartFile file);
+
+    boolean makeAdmin(User user);
+
+    boolean makeBlogger(User user);
+
+    boolean unmakeBlogger(User user);
 }

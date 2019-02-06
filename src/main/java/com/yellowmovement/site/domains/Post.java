@@ -28,13 +28,13 @@ public class Post {
 
     @NotNull
     @NotBlank(message = "Please provide the content.")
+    @Lob
     private String content;
 
     @NotNull
     @NotBlank(message = "Please provide the category.")
     private String category;
 
-    @Column(columnDefinition="varchar(255) default NULL")
     private String image;
 
     private Date postedDate;

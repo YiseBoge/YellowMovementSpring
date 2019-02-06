@@ -22,7 +22,7 @@
             <!-- Title -->
             <h1 class="mt-4" th:text="${currentBlog.title}">Post Title</h1>
 
-            <h3 class="text-muted">By: <span th:text="${currentBlog.blogger.name}">Blogger</span></h3>
+            <h4 class="text-muted font-italic">By: <span th:text="${currentBlog.blogger.name}">Blogger</span></h4>
 
             <hr>
 
@@ -33,10 +33,12 @@
 
             <!-- Preview Image -->
 
-            <img class="d-inline-block rounded-0 shadow-sm" style="width: 100%; height: auto"
-                 th:alt="${currentBlog.title}" th:if="${currentBlog.image} != null" th:src="@{'/uploads/blog-images/'+${currentBlog.image} }"/>
+            <div th:if="${currentBlog.image} != null">
+                <img class="d-inline-block rounded-0 shadow-sm" style="width: 100%; height: auto"
+                     th:alt="${currentBlog.title}" th:src="@{'/uploads/blog-images/'+${currentBlog.image} }"/>
 
-            <hr>
+                <hr>
+            </div>
 
 
             <!-- Post Content -->
@@ -55,7 +57,7 @@
                         <h5 class="mt-0" th:text="${comment.getCommenter().getName()}">commenter name </h5>
 
                         <div class="mb-2">
-                            <p class="col-md-8 my-0" th:each="paragraph : ${comment.getContent().split('\n')}" th:text="${paragraph}">post content</p>
+                            <p class="col-md-8 my-0 lead" th:each="paragraph : ${comment.getContent().split('\n')}" th:text="${paragraph}">post content</p>
                         </div>
 
 
@@ -87,7 +89,7 @@
             </div>
             <div class="mb-5">
                 <a class="btn btn-secondary hover-shadow rounded-0" th:href="@{/blog}">
-                    Return to Home
+                    Return to Blogs
                 </a>
             </div>
         </div>

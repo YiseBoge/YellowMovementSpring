@@ -67,4 +67,24 @@ public class ProfileController {
 		userService.save(user);
 		return "redirect:/profile";
 	}
+
+	@GetMapping("/beBlogger")
+	public String beBlogger(@Valid @ModelAttribute("loggedInUser") User user, Errors errors){
+
+		if(errors.hasErrors()){
+			return "redirect:/profile?performing=edit";
+		}
+		userService.makeBlogger(user);
+		return "redirect:/profile";
+	}
+
+	@GetMapping("/unbeBlogger")
+	public String unbeBlogger(@Valid @ModelAttribute("loggedInUser") User user, Errors errors){
+
+		if(errors.hasErrors()){
+			return "redirect:/profile?performing=edit";
+		}
+		userService.unmakeBlogger(user);
+		return "redirect:/profile";
+	}
 }

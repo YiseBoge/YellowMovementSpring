@@ -28,9 +28,9 @@ public class Blog {
 
     @NotNull
     @NotBlank
+    @Lob
     private String content;
 
-    @Column(columnDefinition="varchar(50) default NULL")
     private String image;
 
     private Date bloggedDate;

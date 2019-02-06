@@ -80,7 +80,7 @@ public class PostContentPageController {
 
         model.addAttribute("comment", new Comment());
 
-        return "PostContentPage";
+        return "redirect:/post/"+postId;
     }
 
 

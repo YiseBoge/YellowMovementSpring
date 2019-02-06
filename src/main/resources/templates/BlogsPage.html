@@ -36,7 +36,7 @@
                 <div class="card-header">
                     <img class="shadow-sm rounded-circle d-inline-block border border-light"
                          th:src="@{'/uploads/profile_pictures/'+${blog.blogger.profilePic}}" width="38" height="38" alt="404">
-                    <span class="text-capitalize text-dark font-weight-bold text-capitalize m-3" th:text="${blog.blogger.name}">category</span>
+                    <span class="text-capitalize text-dark font-weight-bold text-capitalize m-2" th:text="${blog.blogger.name}">category</span>
                 </div>
                 <img alt="Card image cap" class="card-img-top rounded-0" th:if="${blog.image} != null" th:src="@{'/uploads/blog-images/'+${blog.image} }">
                 <div class="card-body">
@@ -57,7 +57,7 @@
             <!-- Pagination -->
             <ul class="pagination justify-content-center mb-4 rounded-0" th:if="${paginate} != 'no'">
                 <li class="page-item rounded-0 shadow-sm" th:each="i : ${#numbers.sequence(0,(dataList.totalPages)-1)}">
-                    <a class="page-link" th:href="@{/home(page=${i})}" th:text="${i + 1}" th:classappend="${currentPage}==${i}?'bg-warning text-white':'text-warning'"></a>
+                    <a class="page-link" th:href="@{/blog(page=${i})}" th:text="${i + 1}" th:classappend="${currentPage}==${i}?'bg-warning text-white':'text-warning'"></a>
                 </li>
             </ul>
 

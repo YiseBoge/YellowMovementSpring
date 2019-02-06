@@ -44,6 +44,23 @@ public class WelcomeController {
 
     @GetMapping
     public String home() {
+
+        System.out.println("\nChecking existence of Admin...\n");
+        if (userService.findUserByEmail("admin1@admin.com") == null){
+            System.out.println("\nRegistering New Admin...\n");
+            User admin = new User();
+            admin.setName("Admin");
+            admin.setEmail("admin1@admin.com");
+            admin.setPassword("0000");
+            admin.setSex("female");
+            userService.saveUser(admin);
+
+            User adminAgain = userService.findUserByEmail("admin1@admin.com");
+            userService.makeAdmin(adminAgain);
+
+        }
+
+
         return "index";
     }
 

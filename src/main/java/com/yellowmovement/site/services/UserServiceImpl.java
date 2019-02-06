@@ -92,6 +92,54 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean makeAdmin(User user) {
+        Role adminRole = roleRepository.findByRole("ADMIN");
+        if(!user.getRoles().contains(adminRole)) {
+            try {
+                user.getRoles().add(adminRole);
+                userRepository.save(user);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean makeBlogger(User user) {
+        Role bloggerRole = roleRepository.findByRole("BLOGGER");
+        if(!user.getRoles().contains(bloggerRole)) {
+            try {
+                user.getRoles().add(bloggerRole);
+                userRepository.save(user);
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean unmakeBlogger(User user) {
+        Role bloggerRole = roleRepository.findByRole("BLOGGER");
+        if(user.getRoles().contains(bloggerRole)){
+            try{
+                user.getRoles().remove(bloggerRole);
+                userRepository.save(user);
+                return true;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        return false;
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(s);
 

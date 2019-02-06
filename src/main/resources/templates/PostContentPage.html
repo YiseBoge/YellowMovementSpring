@@ -31,11 +31,12 @@
             <hr>
 
             <!-- Preview Image -->
+            <div th:if="${currentPost.image} != null">
+                <img class="d-inline-block rounded-0 shadow-sm" style="width: 100%; height: auto"
+                     th:alt="${currentPost.title}" th:src="@{'/uploads/post-images/'+${currentPost.image} }"/>
 
-            <img class="d-inline-block rounded-0 shadow-sm" style="width: 100%; height: auto"
-                 th:alt="${currentPost.title}" th:if="${currentPost.image} != null" th:src="@{'/uploads/post-images/'+${currentPost.image} }"/>
-
-            <hr>
+                <hr>
+            </div>
 
 
             <!-- Post Content -->
@@ -48,14 +49,14 @@
 
                 <div class="media mb-4" th:each="comment:${currentPost.comments}">
 
-                    <img class="d-flex mr-3 rounded-circle" height="38" th:src="@{'/uploads/profile_pictures/' + ${comment.getCommenter().getProfilePic()}}"/>
+                    <img class="d-flex mr-3 rounded-circle" height="38" width="38" th:src="@{'/uploads/profile_pictures/' + ${comment.getCommenter().getProfilePic()}}"/>
 
                     <div class="media-body">
 
                         <h5 class="mt-0" th:text="${comment.getCommenter().getName()}">commenter name </h5>
 
-                        <div th:each="paragraph : ${comment.getContent().split('\n')}">
-                            <p class="col-md-8 my-0 mb-2" th:text="${paragraph}">post content</p>
+                        <div class="mb-2">
+                            <p class="col-md-8 my-0 lead" th:each="paragraph : ${comment.getContent().split('\n')}" th:text="${paragraph}">post content</p>
                         </div>
 
                         <p class="text-muted d-block" th:text="${comment.dateString()}">comment date</p>

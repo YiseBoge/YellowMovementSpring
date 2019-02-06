@@ -35,7 +35,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="d-inline-block border border-warning rounded-circle shadow-lg mb-4"
-                             th:style="'background-image:url(' + @{'/uploads/profile_pictures/'+${loggedInUser.profilePic}} + ');width: 300px; height: 300px; background-size: cover; background-position: center; border:5px; margin-top: -150px;'"></div>
+                             th:style="'background-image:url(\'' + @{'/uploads/profile_pictures/'+${loggedInUser.profilePic}} + '\');width: 300px; height: 300px; background-size: cover; background-position: center; border:5px; margin-top: -150px;'"></div>
                     </div>
                 </div>
 
@@ -56,9 +56,12 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12" th:each="role : ${loggedInUser.roles}">
-                        <p class="font-italic text-muted" th:if="${role.role != 'USER'}" th:text="${role.role}">
-                            USER ROLE
+                    <div class="col-md-12">
+                        <p class="font-italic text-muted" sec:authorize="hasAuthority('BLOGGER')">
+                            Blogger
+                        </p>
+                        <p class="font-italic text-muted" sec:authorize="hasAuthority('ADMIN')">
+                            Admin
                         </p>
                     </div>
                 </div>
@@ -76,7 +79,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <p class="lead text-muted">
-                            Here since <span class="font-italic" th:text="${loggedInUser.dateString}">Date Joined</span>
+                            Here since <span class="font-italic" th:text="${loggedInUser.dateString()}">Date Joined</span>
                         </p>
                     </div>
                 </div>
@@ -88,6 +91,7 @@
                                 class="fas fa-user-edit d-inline-block mr-2"></i> Edit Profile
                         </a>
                     </div>
+
                     <!--<div class="col-md">-->
                         <!--<a class="btn btn-link text-muted" data-target="#changePasswordModal" data-toggle="modal"-->
                            <!--th:href="@{#}"><i-->
@@ -107,7 +111,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="d-inline-block border border-warning rounded-circle shadow-lg mb-4"
-                                 th:style="'background-image:url(' + @{'/uploads/profile_pictures/'+${loggedInUser.profilePic}} + ');width: 300px; height: 300px; background-size: cover; background-position: center; border:5px; margin-top: -150px;'">
+                                 th:style="'background-image:url(\'' + @{'/uploads/profile_pictures/'+${loggedInUser.profilePic}} + '\');width: 300px; height: 300px; background-size: cover; background-position: center; border:5px; margin-top: -150px;'">
                                 <a class="d-inline-block text-white bg-warning display-4 rounded-circle"
                                    style="width: 300px; height: 300px; opacity: 0.4; line-height: 300px; color: #FFF;"
                                    th:href="@{/profile/uploadImg}"><i
@@ -150,10 +154,15 @@
                         </div>
                     </div>
 
-                    <div class="row" th:if="${loggedInUser.roles.size() <= 1}">
-                        <div class="col-md-12">
-                            <a class="btn btn-link text-muted" th:href="@{#}"><i
+                    <div class="row">
+                        <div class="col-md-12" sec:authorize="!hasAuthority('BLOGGER') && !hasAuthority('ADMIN')">
+                            <a class="btn btn-link text-muted" th:href="@{/profile/beBlogger}"><i
                                     class="fas fa-plus d-inline-block mr-2"> </i> Be a Blogger
+                            </a>
+                        </div>
+                        <div class="col-md-12" sec:authorize="hasAuthority('BLOGGER')">
+                            <a class="btn btn-link text-muted" th:href="@{/profile/unbeBlogger}"><i
+                                    class="fas fa-minus d-inline-block mr-2"> </i> Remove Blogging Rights
                             </a>
                         </div>
                     </div>

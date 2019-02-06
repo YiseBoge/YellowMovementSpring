@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -59,11 +60,17 @@ public class BlogServiceImpl implements BlogService {
 
                 blogRepository.save(blog);
 
-            } catch (IOException | RuntimeException e) {
+            }catch (FileAlreadyExistsException e){
+                blog.setImage(file.getOriginalFilename());
+                blogRepository.save(blog);
+            }
+            catch (IOException | RuntimeException e) {
                 e.printStackTrace();
             }
         }
-        return null;
+
+        blog.setBlogger(blogger);
+        return blogRepository.save(blog);
     }
 
     @Override
