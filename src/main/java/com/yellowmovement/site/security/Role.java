@@ -1,24 +1,24 @@
 package com.yellowmovement.site.security;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 import javax.persistence.*;
 
 @Data
 @Entity
-@AllArgsConstructor
 @Table(name = "roles")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role {
-    
-	public Role() {
-    	
-    }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
-    private  String role;
-     
+
+    private String role;
+
+    public Role(String role){
+        this.role = role;
+    }
 }

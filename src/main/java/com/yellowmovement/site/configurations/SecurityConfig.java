@@ -1,6 +1,7 @@
 package com.yellowmovement.site.configurations;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -37,7 +38,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/createAccount").permitAll()
+                .antMatchers("/post/new").hasAuthority("ADMIN")
+                .antMatchers("/blog/new").hasAuthority("BLOGGER")
                 .antMatchers("/home", "/post/*").hasAuthority("USER")
+                .antMatchers("/actuator/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -53,8 +57,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .exceptionHandling()
                 .accessDeniedPage("/access-denied");
+//        http.requestMatcher(EndpointRequest.toAnyEndpoint())
+//        .authorizeRequests().anyRequest().hasRole("ADMIN").and().httpBasic();
     }
-
+    
+    
     @Override
     public void configure(WebSecurity webSecurity) throws Exception {
 

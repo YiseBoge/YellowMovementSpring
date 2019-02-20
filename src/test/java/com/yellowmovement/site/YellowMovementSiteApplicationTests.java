@@ -54,18 +54,18 @@ public class YellowMovementSiteApplicationTests {
         assertThat(controller).isNotNull();
     }
 	
-	@Before(value = "")
-	 public void initDB() {
-		 {
-			 User newUser = new User( "User 1","example1@example.com",1,"0000","female");
-			 userService.saveUser(newUser);
-		 }
-		 
-	 }
-	 @Test
-	 public void testUser() {
-		 User user = userService.findUserByEmail("example1@example.com");
-		 assertNotNull(user);
-	 }
+//	@Before(value = "")
+//	 public void initDB() {
+//		 {
+//			 User newUser = new User( "User 1","example1@example.com",1,"0000","female");
+//			 userService.saveUser(newUser);
+//		 }
+//
+//	 }
+//	 @Test
+//	 public void testUser() {
+//		 User user = userService.findUserByEmail("example1@example.com");
+//		 assertNotNull(user);
+//	 }
 
 }

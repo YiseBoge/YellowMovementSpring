@@ -20,34 +20,35 @@
         <div class="col-xl-10">
 
             <!-- Title -->
-            <h1 class="mt-4" th:text="${currentPost.title}">Post Title</h1>
+            <h1 class="mt-4" th:text="${currentBlog.title}">Post Title</h1>
 
+            <h4 class="text-muted font-italic">By: <span th:text="${currentBlog.blogger.name}">Blogger</span></h4>
 
             <hr>
 
             <!-- Date/Time -->
-            <p class="text-muted" th:text="${currentPost.dateString()}"></p>
+            <p class="text-muted" th:text="${currentBlog.dateString()}"></p>
 
             <hr>
 
             <!-- Preview Image -->
-            <div th:if="${currentPost.image} != null">
+
+            <div th:if="${currentBlog.image} != null">
                 <img class="d-inline-block rounded-0 shadow-sm" style="width: 100%; height: auto"
-                     th:alt="${currentPost.title}" th:src="@{'/uploads/post-images/'+${currentPost.image} }"/>
+                     th:alt="${currentBlog.title}" th:src="@{'/uploads/blog-images/'+${currentBlog.image} }"/>
 
                 <hr>
             </div>
 
 
             <!-- Post Content -->
-            <p th:each="paragraph : ${currentPost.content.split('\n')}" th:text="${paragraph}"></p>
+            <p th:each="paragraph : ${currentBlog.content.split('\n')}" th:text="${paragraph}"></p>
 
             <hr>
 
-
             <div class="ml-md-3 col-md-8 my-4 shadow-sm" style="max-height: 30vh !important; overflow-y: scroll">
 
-                <div class="media mb-4" th:each="comment:${currentPost.comments}">
+                <div class="media mb-4" th:each="comment:${currentBlog.comments}">
 
                     <img class="d-flex mr-3 rounded-circle" height="38" width="38" th:src="@{'/uploads/profile_pictures/' + ${comment.getCommenter().getProfilePic()}}"/>
 
@@ -59,10 +60,10 @@
                             <p class="col-md-8 my-0 lead" th:each="paragraph : ${comment.getContent().split('\n')}" th:text="${paragraph}">post content</p>
                         </div>
 
+
                         <p class="text-muted d-block" th:text="${comment.dateString()}">comment date</p>
                         <hr/>
                     </div>
-
 
                 </div>
 
@@ -72,7 +73,7 @@
                 <h5 class="card-header">Leave a Comment:</h5>
                 <div class="card-body">
 
-                    <form action="/post/comment" method="post" role="form" th:object="${comment}">
+                    <form action="/blog/comment" method="post" role="form" th:object="${comment}">
                         <div class="form-group">
                             <textarea class="form-control rounded-0" name="CommentArea" rows="2" th:field="*{content}"></textarea>
                             <span class="text-danger font-weight-light d-block"
@@ -81,14 +82,14 @@
                         </div>
                         <button class="btn btn-outline-warning rounded-0 hover-shadow" type="submit">Comment</button>
                         <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" type="hidden"/>
-                        <input th:name="postId" th:value="${currentPost.getPostId()}" type="hidden"/>
+                        <input th:name="blogId" th:value="${currentBlog.getBlogId()}" type="hidden"/>
                     </form>
 
                 </div>
             </div>
             <div class="mb-5">
-                <a class="btn btn-secondary hover-shadow rounded-0" th:href="@{/home}">
-                    Return to Home
+                <a class="btn btn-secondary hover-shadow rounded-0" th:href="@{/blog}">
+                    Return to Blogs
                 </a>
             </div>
         </div>
