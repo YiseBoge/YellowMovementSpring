@@ -51,19 +51,19 @@ public class HomeControllerTest {
         assertThat(categories).contains("Science and Technology","General","Entertainment");
 	}
 	
-	@Test
-	public void addPostsToModel() {
-		List<Post> posts = new ArrayList<>();
-		ArrayList<Post> pos = new ArrayList<>();
-		List<Comment> comment = new ArrayList<>();
-		Post post1 = new Post((long)1,"Post1","Here post one","Entertainment","Image/a.jpg", new Date(),"04/08/34",comment);
-		posts.add(post1);
-		Mockito.when(postRepository.findOrderedPosts()).thenReturn(posts);
-		postRepository.findOrderedPosts().forEach(i -> pos.add(i));
-		
-		assertThat(posts).isNotEmpty();
-	    assertThat(posts).contains(post1);
-	}
+//	@Test
+//	public void addPostsToModel() {
+//		List<Post> posts = new ArrayList<>();
+//		ArrayList<Post> pos = new ArrayList<>();
+//		List<Comment> comment = new ArrayList<>();
+//		Post post1 = new Post((long)1,"Post1","Here post one","Entertainment","Image/a.jpg", new Date(),"04/08/34",comment);
+//		posts.add(post1);
+//		Mockito.when(postRepository.findOrderedPosts()).thenReturn(posts);
+//		postRepository.findOrderedPosts().forEach(i -> pos.add(i));
+//
+//		assertThat(posts).isNotEmpty();
+//	    assertThat(posts).contains(post1);
+//	}
 	
 	@Autowired
 	private MockMvc mockMvc;
