@@ -119,12 +119,14 @@
             <div class="card my-4 rounded-0 shadow-sm">
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
-                    <div class="input-group shadow-sm">
-                        <input type="text" class="form-control  rounded-0" placeholder="Search for...">
-                        <span class="input-group-btn">
-                  <button class="btn btn-warning text-light rounded-0" type="button">Go!</button>
-                </span>
-                    </div>
+                    <form action="/home/category/" method="get">
+                        <div class="input-group shadow-sm">
+                            <input type="text" class="form-control  rounded-0" name="keyword" id="searchBar" placeholder="Search for...">
+                            <span class="input-group-btn">
+                            <button class="btn btn-warning text-light rounded-0" type="submit">Go!</button>
+                        </span>
+                        </div>
+                    </form>
                 </div>
             </div>
 
@@ -135,7 +137,7 @@
 
                     <div class="row p-1" th:each="category:${categoriesList}">
                         <div class="col-lg-6 py-1">
-                            <a href="#" class="text-warning" th:text="${category}">Web Design</a>
+                            <a th:href="@{'/home/category?keyword=' + ${category}}" class="text-warning" th:text="${category}">Web Design</a>
                         </div>
 
                     </div>
