@@ -57,6 +57,14 @@ public class HomeController {
         return "HomePage";
     }
 
+    @GetMapping("/delete/{postId}")
+    public String deletePost(@PathVariable("postId") Long postId){
+
+        postService.deleteById(postId);
+
+        return "redirect:/home";
+    }
+
     @ModelAttribute("loggedInUser")
     public User addUserToModel(@AuthenticationPrincipal User user) {
         return user;

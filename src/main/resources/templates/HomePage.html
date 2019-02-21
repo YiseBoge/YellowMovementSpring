@@ -45,6 +45,8 @@
                     <a class="btn btn-outline-warning rounded-0 hover-shadow" th:href="@{'/post/' + ${post.postId}}">Read
                         More
                         &rarr;</a>
+                    <a class="btn btn-outline-danger rounded-0 hover-shadow ml-2" sec:authorize="hasAuthority('ADMIN')" th:href="@{'/home/delete/' + ${post.postId}}">Remove
+                        </a>
                 </div>
                 <div class="card-footer text-muted" th:text="${post.dateString()}">
                     January 1, 2017
