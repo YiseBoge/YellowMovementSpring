@@ -18,14 +18,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+ 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import com.yellowmovement.site.controllers.HomeController;
+ 
 import com.yellowmovement.site.domains.Comment;
 import com.yellowmovement.site.domains.Post;
 import com.yellowmovement.site.repositories.PostRepository;
@@ -72,5 +71,14 @@ public class HomeControllerTest {
         this.mockMvc.perform(get("/")).
         	andDo(print()).andExpect(status().isOk());
     }
-		
+	
+	@Test
+	public void openPostPageTest() {
+		ArrayList<Post> posts = new ArrayList<>();
+		List<Comment> comment = new ArrayList<>();
+		Post post1 = new Post((long)1,"Post1","Here post one","Entertainment","Image/a.jpg", new Date(),"04/08/34",comment);
+		posts.add(post1);
+		Mockito.when(postRepository.searchPosts("Post1")).thenReturn(posts);
+		assertThat(posts).isNotEmpty();
+		}
 }
