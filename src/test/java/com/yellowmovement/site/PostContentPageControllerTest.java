@@ -53,7 +53,7 @@ public class PostContentPageControllerTest {
 		Long x = (long) 3;
 		Optional<Post> postJustForTest = null;
 		List<Comment> comment = new ArrayList<>();
-		Post post1 = new Post((long)1,"Post1","Here post one","Entertainment","Image/a.jpg", new Date(),"04/08/34",comment);
+		Post post1 = new Post((long)1,"Post1","Here post one","Entertainment","Image/a.jpg", new Date(),comment);
 		when(postRepo.findById(x)).thenReturn(postJustForTest);
 		
 		mockMvc.perform(get("/post/1"))

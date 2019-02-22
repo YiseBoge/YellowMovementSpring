@@ -1,22 +1,15 @@
 package com.yellowmovement.site.controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.yellowmovement.site.repositories.PostRepository;
-import com.yellowmovement.site.repositories.UserRepository;
 import com.yellowmovement.site.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
-import com.yellowmovement.site.domains.Credential;
 import com.yellowmovement.site.security.User;
 
 import lombok.extern.slf4j.Slf4j;
@@ -29,9 +22,19 @@ public class WelcomeController {
     @Autowired
     private UserService userService;
 
+    @ModelAttribute("title")
+    public String addPageTitle() {
+        return "Welcome to the Yellow Movement";
+    }
+
     @ModelAttribute(name="account")
     public User user() {
         return new User();
+    }
+
+    @ModelAttribute(name="loggedInUser")
+    public User loggedInUser(@AuthenticationPrincipal User user){
+        return user;
     }
 
     @GetMapping("/login")
@@ -41,6 +44,23 @@ public class WelcomeController {
 
     @GetMapping
     public String home() {
+
+        System.out.println("\nChecking existence of Admin...\n");
+        if (userService.findUserByEmail("admin1@admin.com") == null){
+            System.out.println("\nRegistering New Admin...\n");
+            User admin = new User();
+            admin.setName("Admin");
+            admin.setEmail("admin1@admin.com");
+            admin.setPassword("0000");
+            admin.setSex("female");
+            userService.saveUser(admin);
+
+            User adminAgain = userService.findUserByEmail("admin1@admin.com");
+            userService.makeAdmin(adminAgain);
+
+        }
+
+
         return "index";
     }
 
