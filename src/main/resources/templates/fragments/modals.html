@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org">
 
 
 <!-- Login Modal -->
@@ -12,7 +12,7 @@
 
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
-            <form action="/login" class="container p-3" id="loginForm" method="post">
+            <form class="container p-3" id="loginForm" method="post" th:action="@{/login}">
                 <div class="modal-header">
                     <h5 class="modal-title" id="loginModalTitle">Sign In</h5>
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
@@ -58,7 +58,7 @@
 
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
-            <form action="/createAccount" class="container p-3" id="createAccountForm" method="post"
+            <form class="container p-3" id="createAccountForm" method="post" th:action="@{/createAccount}"
                   th:object="${account}">
                 <div class="modal-header">
                     <h5 class="modal-title" id="createAccountModalTitle">Sign up - Create Your New Account Here</h5>

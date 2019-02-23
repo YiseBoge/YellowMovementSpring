@@ -17,7 +17,7 @@
     <div class="row">
 
         <div class="col-md-12" id="profileBackgroundImg"
-             style="background-image: url('/img/cover-photo.jpeg'); background-size: cover; height: 30vh">
+             th:style="'background-image: url('+@{/img/cover-photo.jpeg}+'); background-size: cover; height: 30vh'">
 
 
         </div>
@@ -106,7 +106,7 @@
             <div class="container col-md-4"
                  id="profileEditRegion"
                  th:if="${(param.performing != null) and ((param.performing[0] == 'edit') or (param.performing[0] == 'uploadImg')) }">
-                <form action="profile/edit" method="POST" th:object="${loggedInUser}">
+                <form method="POST" th:action="@{profile/edit}" th:object="${loggedInUser}">
 
                     <div class="row">
                         <div class="col-md-12">
@@ -220,7 +220,7 @@
      tabindex="-1">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
-            <form action="/changePassword" class="container p-3" id="changePasswordForm" method="post">
+            <form class="container p-3" id="changePasswordForm" method="post" th:action="@{/changePassword}">
                 <div class="modal-header">
                     <h5 class="modal-title" id="changePasswordModalTitle">Change Password</h5>
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
@@ -269,7 +269,8 @@
      th:if="${(param.performing != null) and (param.performing[0] == 'uploadImg')}">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content rounded-0">
-            <form action="/profile/uploadImg" class="container p-3" id="uploadImgForm" method="POST" enctype="multipart/form-data">
+            <form class="container p-3" enctype="multipart/form-data" id="uploadImgForm" method="POST"
+                  th:action="@{/profile/uploadImg}">
                 <div class="modal-header">
                     <h5 class="modal-title" id="uploadImgModalTitle">Edit Profile Image</h5>
                     <button aria-label="Close" class="close" data-dismiss="modal" type="button">

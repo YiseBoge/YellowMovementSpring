@@ -72,7 +72,7 @@
                 <h5 class="card-header">Leave a Comment:</h5>
                 <div class="card-body">
 
-                    <form action="/post/comment" method="post" role="form" th:object="${comment}">
+                    <form method="post" role="form" th:action="@{/post/comment}" th:object="${comment}">
                         <div class="form-group">
                             <textarea class="form-control rounded-0" name="CommentArea" rows="2" th:field="*{content}"></textarea>
                             <span class="text-danger font-weight-light d-block"

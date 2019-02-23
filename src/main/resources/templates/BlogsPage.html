@@ -70,7 +70,7 @@
             <div class="card my-4 rounded-0 shadow-sm">
                 <h5 class="card-header">Search</h5>
                 <div class="card-body">
-                    <form action="/blog/category" method="get">
+                    <form method="get" th:action="@{/blog/category}">
                         <div class="input-group shadow-sm">
                             <input class="form-control  rounded-0" id="searchBar" name="keyword" placeholder="Search for..."
                                    type="text">
