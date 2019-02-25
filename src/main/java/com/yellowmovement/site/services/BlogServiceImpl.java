@@ -61,6 +61,7 @@ public class BlogServiceImpl implements BlogService {
                 blogRepository.save(blog);
 
             }catch (FileAlreadyExistsException e){
+                blog.setBlogger(blogger);
                 blog.setImage(file.getOriginalFilename());
                 blogRepository.save(blog);
             }

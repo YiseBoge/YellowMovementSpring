@@ -3,7 +3,6 @@ package com.yellowmovement.site.controllers;
 
 import com.yellowmovement.site.domains.Comment;
 import com.yellowmovement.site.domains.Post;
-import com.yellowmovement.site.repositories.CommentRepisotory;
 import com.yellowmovement.site.security.User;
 import com.yellowmovement.site.services.CommentService;
 import com.yellowmovement.site.services.PostService;
@@ -59,10 +58,12 @@ public class PostContentPageController {
     @PostMapping("/comment")
     public String openPostPage(@Valid @ModelAttribute("comment") Comment comment, Errors errors, @RequestParam("postId") Long postId, @AuthenticationPrincipal User user, Model model){
         Optional<Post> currentPost = postService.findById(postId);
-        Post post = currentPost.get();;
+        Post post = currentPost.get();
 
 
         model.addAttribute("currentPost", post);
+
+        model.addAttribute("comment", new Comment());
 
         if (errors.hasErrors()){
             log.info(comment.toString());
@@ -78,7 +79,6 @@ public class PostContentPageController {
 
         postService.save(post);
 
-        model.addAttribute("comment", new Comment());
 
         return "redirect:/post/"+postId;
     }

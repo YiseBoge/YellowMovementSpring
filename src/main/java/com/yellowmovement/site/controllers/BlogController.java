@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -58,6 +57,13 @@ public class BlogController {
         return user;
     }
 
+    @GetMapping("/delete/{blogId}")
+    public String deleteBlog(@PathVariable("blogId") Long blogId) {
+
+        blogService.deleteById(blogId);
+
+        return "redirect:/blog";
+    }
 
     @PostMapping
     public String blogsProcessor() {
